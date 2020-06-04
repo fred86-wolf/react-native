@@ -22,7 +22,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ecodeli.ecodeliapp"
+    },
+    "android":{
+      "package": "com.ecodeli.ecodeliapp"
     }
   }
 }
