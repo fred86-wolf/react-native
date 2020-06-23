@@ -42,8 +42,8 @@ export default StyleSheet.create({
         marginTop:10
     },
     carouselHome:{
-        height:height/6, 
-        width:125,
+        height:height/5, 
+        width:width/3,
         borderColor:'#808080',
         borderWidth:0.5, 
         borderRadius:10, 

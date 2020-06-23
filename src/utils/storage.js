@@ -9,6 +9,14 @@ export const saveItem = async (keyName, keyValue) => {
     }
   };
   
+export const mergeItem = async (keyName, keyValue) =>{
+  try {
+    await AsyncStorage.mergeItem(keyName, keyValue);
+  } catch (e) {
+    return false
+  }
+};
+
 export const getItem = async keyName => {
     try {
       return await AsyncStorage.getItem(keyName);

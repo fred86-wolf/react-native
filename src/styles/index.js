@@ -38,7 +38,6 @@ export default StyleSheet.create({
     fontWeight: '400'
   },
   textProfileInfo:{
-    marginTop:20,
     fontSize:20,
     alignSelf:'center'
   }

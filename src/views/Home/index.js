@@ -1,37 +1,29 @@
 import React,{useEffect, useState} from 'react';
-import { ScrollView, View, Image } from 'react-native';
+import { ScrollView, View, Image,TouchableOpacity, Linking, StatusBar} from 'react-native';
 import axios from 'axios';
 import  MyHeader  from '../../components/Header';
-import {ListViewer} from '../../components/ListSideBar';
-import apiClass from '../../redux/api/classroom';
 import apiCall from '../../redux/api/index';
 import { getItem } from '../../utils/storage';
-import { Container,Drawer,Spinner, Content,Grid, Col, Text, Card, CardItem,Body, Icon,Row, Button} from 'native-base';
+import { Container,Spinner, Content,Grid, Col, Text, Card, CardItem,Body, Icon,Row, Button} from 'native-base';
+import genericStyles from '../../styles';
 import styles from './style';
 import {ACCESS_TOKEN } from '../../consts';
 const course = require('../../../assets/cursos.png');
+
 export default function Home ({navigation}){
   const [awardsPersonal, setAwardsPersonal] = useState(null);
   const [unitsCourses, setUnitsCourses] = useState(null);
   useEffect(() => {
-    if (!awardsPersonal && !unitsCourses) {
-      listAwards();
       listCourses();
-    }
+      listAwards();
   }, [awardsPersonal,unitsCourses]);
   const listCourses = async () => {
     const token = await getItem(ACCESS_TOKEN);
-    // const method = 'GET';
-    // const params = {access_token: token};
-    // const response = await apiClass(method,params);
-    // let unitsCourses = response.data.courses;
-    // setUnitsCourses(unitsCourses.reverse());
     axios.get('https://classroom.googleapis.com/v1/courses',{
       params:{access_token: token}
     }).then(function (response){
       let unitsCourses = response.data.courses;
       setUnitsCourses(unitsCourses.reverse());
-      console.log(unitsCourses);
     }).catch(function(error){
       console.log(error);
     });
@@ -44,19 +36,18 @@ export default function Home ({navigation}){
     let awardsPersonal = response.data;
     setAwardsPersonal(awardsPersonal);
   }
-    
-    closeDrawer = () => { this.drawer._root.close()};
-    openDrawer = () => { this.drawer._root.open() };
-    const handleProfile = () =>{
+  const handleClassroom = (url) =>{
+    Linking.openURL(url);
+  }
+    const handleAwards = () =>{
       navigation.navigate('Awards');
     }
-    if (!awardsPersonal) {
+    if (!awardsPersonal || !unitsCourses) {
       return <Spinner color='blue' />;
     }
     return (
       <Container>
         <MyHeader/>
-        <Drawer ref={(ref) => { this.drawer = ref; }} content={<ListViewer/>} onClose={() => this.closeDrawer()}>
         <Content padder>
           <Row>
           <Card style={styles.cardMain} bordered>
@@ -76,8 +67,6 @@ export default function Home ({navigation}){
               </CardItem>
           </Card>
           </Row>
-        {/* <Grid style={styles.containerTwo}> */}
-          {/* <Col style={styles.carouselHomeHeight}> */}
           <View style={{marginTop:10, alignSelf:'flex-end', marginRight:10}}>
               <Icon type='FontAwesome5' name='book-reader' style={{color:'blue'}}/>
             </View>
@@ -85,12 +74,12 @@ export default function Home ({navigation}){
               <Text>Cursos</Text>
             </View>
           <ScrollView horizontal={true}>
-            {unitsCourses && unitsCourses.map(unit =>{
+            {unitsCourses && unitsCourses.map((unit) =>{
               return (
-                <View style={styles.carouselHome} onPress={unit.alternateLink}>
-                <View style={styles.carouselHomeInside}>
-                  <Image style={styles.carouselImage} source={course}/>
-                </View>
+                <View key={unit.id} style={styles.carouselHome}>
+                <TouchableOpacity style={styles.carouselHomeInside} onPress={() => handleClassroom(unit.alternateLink)}>
+                  <Image style={styles.carouselImage} source={ course && course} />
+                </TouchableOpacity>
                 <View style={styles.carouselText}>
                   <Text style={styles.carouselTextInside}>
                     {unit.name}
@@ -99,9 +88,6 @@ export default function Home ({navigation}){
               </View>)
             })}
             </ScrollView>
-          {/* </Col> */}
-        {/* </Grid> */}
-        {/* <Grid style={styles.containerThree}> */}
           <Row style={styles.dateCard}>
             <Col>
             <Icon style={styles.calendarDayIcon} type='FontAwesome5' name='calendar-day'></Icon>
@@ -124,9 +110,6 @@ export default function Home ({navigation}){
               </Card>
             </Col>
           </Row>
-        {/* </Grid> */}
-        {/* <Grid style={styles.containerTwo}> */}
-          {/* <Col style={styles.carouselHomeHeight}> */}
             <View style={{marginTop:10, alignSelf:'flex-end', marginRight:10}}>
               <Icon type='FontAwesome5' name='gifts' style={{color:'red'}}/>
             </View>
@@ -134,11 +117,11 @@ export default function Home ({navigation}){
               <Text>Premios</Text>
             </View>
           <ScrollView horizontal={true}>
-            {awardsPersonal.map(award=>{
+            {awardsPersonal && awardsPersonal.map((award,index)=>{
               return (
-            <View style={styles.carouselHome}>
+            <View key={index} style={styles.carouselHome}>
               <View style={styles.carouselHomeInside}>
-                <Image style={styles.carouselImage} source={course}/>
+                <Image  style={styles.carouselImage}  source={course && course} />
               </View>
               <View style={styles.carouselText}>
                 <Text style={styles.carouselTextInside}>
@@ -151,13 +134,10 @@ export default function Home ({navigation}){
             </View> )
             })}
             </ScrollView>
-          {/* </Col> */}
-        {/* </Grid> */}
         <Grid style={styles.containerFourth}>
-          <Button rounded info style={styles.seeBtn} onPress={handleProfile}><Text> Ver Más </Text></Button>
+          <Button rounded info style={styles.seeBtn} onPress={handleAwards}><Text> Ver Más </Text></Button>
         </Grid>
         </Content>
-      </Drawer>
       </Container>
     );
 }

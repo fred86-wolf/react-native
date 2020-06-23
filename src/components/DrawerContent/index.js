@@ -1,33 +1,29 @@
-import React ,{useState,useEffect} from 'react';
-import styles from './style';
+import React, {useState,useEffect} from 'react';
 import {Content, Button,List, ListItem,Badge, Text, Icon, Left, Body, Right, Thumbnail, CardItem } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
+import styles from './style';
 import { getItem, clearAll } from '../../utils/storage';
 import { USER_INFO } from '../../consts';
 
-export function ListViewer() {
-  const navigation = useNavigation();
-  const [userInfo, setUserInfo] = useState(null);
-  closeDrawer = () => { this.drawer._root.close()};
-  useEffect(() => {
-    if (!userInfo) {
-      loadUserInfo();
-    }
-  });
-  const loadUserInfo = async () =>{
-    let userInfo = await getItem(USER_INFO);
-    userInfo = JSON.parse(userInfo);
-    setUserInfo(userInfo);
-  }
-  const logOut = async () =>{
-    await clearAll();
-    await closeDrawer();
-    navigation.navigate('Login');
-  }
-  return(
-  <Content style={styles.container}>
-    <List>
-      <CardItem bordered style={styles.profileCard}>
+export function DrawerContent(props){
+    const [userInfo, setUserInfo] = useState(null);
+    useEffect(() => {
+        if (!userInfo) {
+          loadUserInfo();
+        }
+      },[userInfo]);
+      const loadUserInfo = async () =>{
+        let userInfo = await getItem(USER_INFO);
+        userInfo = JSON.parse(userInfo);
+        setUserInfo(userInfo);
+      }
+      const logOut = async () =>{
+        await clearAll();
+        props.navigation.navigate('Login');
+      }
+    return (
+    <Content style={styles.container}>
+        <List>
+            <CardItem bordered style={styles.profileCard}>
         <Left>
         <Thumbnail large source={{ uri: userInfo && userInfo.photoUrl }} />
         </Left>
@@ -39,7 +35,7 @@ export function ListViewer() {
         <Right>
         </Right>
       </CardItem>
-      <ListItem icon last onPress={()=> navigation.navigate('Home')}>
+      <ListItem icon last onPress={()=> props.navigation.navigate('Home')}>
         <Left>
           <Button>
             <Icon name='home' />
@@ -54,7 +50,7 @@ export function ListViewer() {
           </Badge>
         </Right>
       </ListItem>
-      <ListItem icon last onPress={()=> navigation.navigate('Awards')}>
+      <ListItem icon last onPress={()=> props.navigation.navigate('Awards')}>
         <Left>
           <Button>
             <Icon name='trophy' />
@@ -111,7 +107,5 @@ export function ListViewer() {
       </ListItem>
     </List>
   </Content>
-  );
+    );
 };
-export default ListViewer;
-
