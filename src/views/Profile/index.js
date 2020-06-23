@@ -62,6 +62,7 @@ export default function Profile(){
         let userInfo = await getItem(USER_INFO);
         userInfo = JSON.parse(userInfo);
         setUserInfo(userInfo);
+        console.log(userInfo);
       }
       const loadUserEcodeli = async () => {
         const strUser = {
@@ -96,7 +97,7 @@ export default function Profile(){
                         <Text>ytyt</Text>
                     </Button>
                     <View style={{ height: openOne ? null : 0, overflow: 'hidden', borderWidth: 0.5, backgroundColor: '#f4f4f4'}}>
-                        <ProfileDetail edoCiviles={arrayEdoCivil} nivelesEscolaridad={arrayEscolaridad}/>
+                        {/* <ProfileDetail edoCiviles={arrayEdoCivil} nivelesEscolaridad={arrayEscolaridad}/> */}
                     </View>
                     <Button onPress={sectionTwo} style={[styles.btnOne, genericStyles.ecoGeneral]}>
                         <Icon name='bookmarks' />
