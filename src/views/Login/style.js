@@ -5,14 +5,14 @@ const { width,height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   content:{
-    backgroundColor:'#408ab4'
+    backgroundColor:'#f0ebea'
   },
   grid: {
     flexDirection: 'column'
   },
   loginFrm: {
     marginTop: 20,
-    width: width / 1.5,
+    width: width / 3,
     height: 60,
     justifyContent: 'center',
   },

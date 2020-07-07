@@ -9,9 +9,11 @@ import { USER_INFO, USER_ECODELI } from '../../consts';
 export default function MyHeader() {
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState(null);
-  useEffect (()=> {
-      loadUserInfo();
-  },[userInfo]);
+  useEffect(() => {
+      if (!userInfo) {
+        loadUserInfo();
+      }
+    },[userInfo]);
   const loadUserInfo = async () => {
     let userInfo = await getItem(USER_INFO);
     userInfo = JSON.parse(userInfo);

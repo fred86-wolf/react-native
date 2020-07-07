@@ -11,9 +11,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashEcoIndustrial.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#2d4256"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,8 +25,9 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.ecodeli.ecodeliapp"
     },
-    "android":{
+    "android": {
       "package": "com.ecodeli.ecodeliapp"
-    }
+    },
+    "description": ""
   }
 }

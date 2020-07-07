@@ -16,7 +16,7 @@ export default function Home ({navigation}){
   useEffect(() => {
       listCourses();
       listAwards();
-  }, [awardsPersonal,unitsCourses]);
+  }, [awardsPersonal]);
   const listCourses = async () => {
     const token = await getItem(ACCESS_TOKEN);
     axios.get('https://classroom.googleapis.com/v1/courses',{
@@ -42,7 +42,7 @@ export default function Home ({navigation}){
     const handleAwards = () =>{
       navigation.navigate('Awards');
     }
-    if (!awardsPersonal || !unitsCourses) {
+    if (!awardsPersonal) {
       return <Spinner color='blue' />;
     }
     return (
@@ -135,7 +135,7 @@ export default function Home ({navigation}){
             })}
             </ScrollView>
         <Grid style={styles.containerFourth}>
-          <Button rounded info style={styles.seeBtn} onPress={handleAwards}><Text> Ver Más </Text></Button>
+          <Button rounded style={styles.seeBtn} onPress={handleAwards}><Text> Ver Más </Text></Button>
         </Grid>
         </Content>
       </Container>

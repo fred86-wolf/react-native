@@ -8,7 +8,7 @@ const uri = 'https://facebook.github.io/react-native/docs/assets/favicon.png';
 export default function Awards(){
     const [awardsPersonal, setAwardsPersonal] = useState(null);
     useEffect(() => {
-        if (!awardsPersonal) {
+        if(!awardsPersonal){
             listAwards();
         }
     });
@@ -28,17 +28,18 @@ export default function Awards(){
             <MyHeader/>
             <Content padder>
                 <View style={{flexDirection:'row', alignItems:'center', flex:1, flexWrap:'wrap'}}>
-                    {awardsPersonal.map((award, index)=>{
-                    <View style={{justifyContent:'center', marginTop:10, width:'50%'}}>
+                    {awardsPersonal && awardsPersonal.map((award,index)=>{
+                    return(
+                    <View key={index} style={{justifyContent:'center', marginTop:10, width:'50%'}}>
                         <View style={{justifyContent:'center'}}>
                             <Text>Nivel {award.intNivel}</Text>
-                            <Image key={index} source={{uri: uri}} style={styles.mainImage}/>
+                            <Image source={{uri: uri}} style={styles.mainImage}/>
                         </View>
                         <View style={{justifyContent:'center'}}>
                             <Text>{award.strConcepto}</Text>
                             <Text>{award.intPuntaje}</Text>
                         </View>
-                    </View>
+                    </View>)
                     })}
                 </View>
             </Content>

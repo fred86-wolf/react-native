@@ -21,8 +21,8 @@ export default function Loading ({ navigation }){
 
   return (
     <Container>
-      <Content contentContainerStyle={styles.content}>
       <StatusBar backgroundColor='#113f67'/>
+      <Content contentContainerStyle={styles.content}>
         <Grid style={styles.grid}>
           <Spinner color='blue' />
         </Grid>

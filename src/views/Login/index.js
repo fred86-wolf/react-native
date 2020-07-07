@@ -15,7 +15,6 @@ const {iosClientId, androidClientId, iosStandaloneAppClientId, androidStandalone
 
 export default function Login({navigation}) {
   const [loading, setLoading] = useState(false);
-  const [refresToken, setRefresToken] = useState(null);
   const url = 'spLogin';
   const method = 'POST';
   const handleLogin = async () => {
@@ -67,7 +66,7 @@ export default function Login({navigation}) {
   return (
       <Container>
         <Content padder contentContainerStyle={[genericStyles.centeredContent, styles.content]}>
-          <StatusBar backgroundColor='#408ab4'/>
+          <StatusBar backgroundColor='#F0EBEA'/>
           <Grid style={[genericStyles.centeredGrid, styles.grid]}>
               <Image style={styles.imageLogo} source={IMAGE_ECO_LOGO} />
               

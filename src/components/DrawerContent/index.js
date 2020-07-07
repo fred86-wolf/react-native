@@ -65,10 +65,10 @@ export function DrawerContent(props){
           </Badge>
         </Right>
       </ListItem>
-      <ListItem icon last>
+      <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter')}>
         <Left>
           <Button>
-            <Icon type='FontAwesome5' name='building' />
+            <Icon type='FontAwesome5' name='closed-captioning' />
           </Button>
         </Left>
         <Body>
@@ -98,7 +98,7 @@ export function DrawerContent(props){
       <ListItem icon last onPress={logOut}>
         <Left>
           <Button>
-            <Icon name='log-out'/>
+            <Icon type='FontAwesome5' name='sign-out-alt'/>
           </Button>
         </Left>
         <Body>
