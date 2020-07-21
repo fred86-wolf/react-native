@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {View, Alert} from 'react-native';
 import apiCall from '../../redux/api';
 import {Container, Content, Button,Text, Thumbnail,Icon, Spinner, Form, Item, Label,Input,Picker, ListItem, Left,Right,Body,Row, Badge, DatePicker, Textarea } from 'native-base';
-import { Tooltip } from 'react-native-elements';
 import styles from './style';
 import genericStyles from '../../styles';
 import MyHeader from '../../components/Header';
@@ -111,6 +110,7 @@ export default function Profile({navigation}) {
       }
       const { data } = await apiCall(url, method, strUser);
       setUserEco(data[0]);
+      console.log(data)
       setStrEstadoCivil(data[0].strEstadoCivil);
       setStrNivelAcademico(data[0].strNivelAcademico);
       setStrCamisa(data[0].strCamisa);

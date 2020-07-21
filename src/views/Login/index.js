@@ -48,20 +48,6 @@ export default function Login({navigation}) {
     }
     setLoading(false);
   };
-  // const handleRefreshtoken = async () => {
-  //   try {
-  //     const response = await AppAuth.refreshAsync({
-  //       iosClientId, 
-  //       androidClientId,
-  //       iosStandaloneAppClientId, 
-  //       androidStandaloneAppClientId,
-  //       scopes:['profile', 'email', 'https://www.googleapis.com/auth/classroom.courses', 'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.coursework.me']
-  //     }, refresToken);
-  //     console.log(response);
-  //   } catch (e) {
-  //     alert(e);
-  //   }
-  // };
   
   return (
       <Container>

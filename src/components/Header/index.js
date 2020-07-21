@@ -4,7 +4,7 @@ import {Header,Left,Right,Icon,Button,Thumbnail} from 'native-base';
 import genericStyles from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { getItem } from '../../utils/storage';
-import { USER_INFO, USER_ECODELI } from '../../consts';
+import { USER_INFO} from '../../consts';
 
 export default function MyHeader() {
   const navigation = useNavigation();
