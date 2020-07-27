@@ -16,7 +16,7 @@ export default function Home ({navigation}){
   useEffect(() => {
       listCourses();
       listAwards();
-  }, [awardsPersonal]);
+  }, [awardsPersonal, unitsCourses]);
   const listCourses = async () => {
     const token = await getItem(ACCESS_TOKEN);
     axios.get('https://classroom.googleapis.com/v1/courses',{
@@ -29,7 +29,7 @@ export default function Home ({navigation}){
     });
   };
   const listAwards = async () => {
-    const url = 'spLogin';
+    const url = 'spAppMovil_Ind';
     const method = 'POST';
     const data = {strAccion: 'CONCEPTOS'};
     const response = await apiCall(url,method, data);

@@ -13,14 +13,13 @@ moment.locale('es');
 
 export default function Profile({navigation}) {
   const method = 'POST';
-  const url = 'spLogin';
+  const url = 'spAppMovil_Ind';
   const [openOne, setOpenOne] = useState(false);
   const [openTwo, setOpenTwo] = useState(false);
   const [openThree, setOpenThree] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [strUsuario, setStrusuario] = useState(null);
-  const [userEco, setUserEco] = useState(null)
-  const [disabledItem, setDisabledItem] = useState(true);
+  const [userEco, setUserEco] = useState(null);
   const [arrayEdoCivil, setArrayEdoCivil] = useState([]);
   const [arrayEscolaridad, setArrayEscolaridad] = useState([]);
   const [arrayCamisas, setArrayCamisas] = useState([]);
@@ -111,11 +110,11 @@ export default function Profile({navigation}) {
       const { data } = await apiCall(url, method, strUser);
       setUserEco(data[0]);
       console.log(data)
-      setStrEstadoCivil(data[0].strEstadoCivil);
-      setStrNivelAcademico(data[0].strNivelAcademico);
-      setStrCamisa(data[0].strCamisa);
-      setStrTPantalon(data[0].strTPantalon);
-      setStrTCalzado(data[0].strTCalzado);
+      data[0].strEstadoCivil !== '' ? setStrEstadoCivil(data[0].strEstadoCivil) : setStrEstadoCivil('');
+      data[0].strNivelAcademico !== '' ? setStrNivelAcademico(data[0].strNivelAcademico) : setStrNivelAcademico('');
+      data[0].strCamisa !== '' ? setStrCamisa(data[0].strCamisa) : setStrCamisa('');
+      data[0].strTPantalon !== '' ? setStrTPantalon(data[0].strTPantalon) : setStrTPantalon('');
+      data[0].strTCalzado !== '' ? setStrTCalzado(data[0].strTCalzado) : setStrTCalzado('');
     } catch (error) {
       console.log('Error', error);
     }
@@ -184,7 +183,7 @@ export default function Profile({navigation}) {
             </Item>
             <Item style={{ marginTop: 5, borderBottomWidth: 0 }} stackedLabel>
               <Label style={{ alignSelf: 'flex-start' }}>* Nombre Completo <Icon style={{ fontSize: 15 }} type='FontAwesome5' name='eye' /></Label>
-              <Text style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }}>{userEco.strNombre + ' ' + ' ' + userEco.strApellidoPaterno + ' ' + userEco.strApellidoMaterno}</Text>
+              <Text style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }}>{`${userEco.strNombre} ${userEco.strApellidoPaterno} ${userEco.strApellidoMaterno}`}</Text>
             </Item>
             <Item style={{ marginTop: 5, borderBottomWidth: 0 }} stackedLabel>
               <Label style={{ alignSelf: 'flex-start' }}>* Fecha de Nacimiento <Icon style={{ fontSize: 15 }} type='FontAwesome5' name='eye' /></Label>
@@ -201,7 +200,7 @@ export default function Profile({navigation}) {
             </Item>
             <Item style={{ marginTop: 5, borderBottomWidth: 0 }} stackedLabel>
               <Label>* Departamento <Icon style={{ fontSize: 15 }} type='FontAwesome5' name='eye' /></Label>
-              <Text style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }}>{userEco.strCentroCostos + ' ' + userEco.strDescripcionCC}</Text>
+              <Text style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }}>{`${userEco.strCentroCostos} ${userEco.strDescripcionCC}`}</Text>
             </Item>
             <Item style={{ height: 40, marginTop: 5, borderBottomWidth: 0 }} stackedLabel>
               <Label>* Estado <Icon style={{ fontSize: 15 }} type='FontAwesome5' name='lock' /></Label>

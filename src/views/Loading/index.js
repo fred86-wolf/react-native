@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import {StatusBar} from 'react-native';
 import { Spinner, Container, Content, Grid } from 'native-base';
-import { ACCESS_TOKEN, USER_INFO } from '../../consts';
+import { ACCESS_TOKEN } from '../../consts';
 import { getItem } from '../../utils/storage';
 import styles from './style';
 

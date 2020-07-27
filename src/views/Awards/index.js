@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Image,StatusBar} from 'react-native';
+import {Image} from 'react-native';
 import styles from './style';
 import MyHeader from '../../components/Header';
 import apiCall from '../../redux/api';
@@ -13,7 +13,7 @@ export default function Awards(){
         }
     });
     const listAwards = async () => {
-        const url = 'spLogin';
+        const url = 'spAppMovil_Ind';
         const method = 'POST';
         const data = {strAccion: 'CONCEPTOS'};
         const response = await apiCall(url,method, data);
