@@ -12,7 +12,7 @@ export function DrawerContent(props){
         if (!userInfo) {
           loadUserInfo();
         }
-      },[userInfo]);
+      });
       const loadUserInfo = async () =>{
         let userInfo = await getItem(USER_INFO);
         let userEcodeli = await getItem(USER_ECODELI);

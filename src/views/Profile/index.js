@@ -18,8 +18,8 @@ export default function Profile({navigation}) {
   const [openTwo, setOpenTwo] = useState(false);
   const [openThree, setOpenThree] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
-  const [strUsuario, setStrusuario] = useState(null);
   const [userEco, setUserEco] = useState(null);
+  const [userEcodeli, setUserEcodeli] = useState(null);
   const [arrayEdoCivil, setArrayEdoCivil] = useState([]);
   const [arrayEscolaridad, setArrayEscolaridad] = useState([]);
   const [arrayCamisas, setArrayCamisas] = useState([]);
@@ -100,8 +100,10 @@ export default function Profile({navigation}) {
 
   }
   const loadUserEcodeli = async () => {
-    let strUsuario = await getItem(USER_ECODELI);
-    setStrusuario(strUsuario);
+    let userEcodeli = await getItem(USER_ECODELI);
+    userEcodeli = JSON.parse(userEcodeli);
+    setUserEcodeli(userEcodeli);
+    console.log(userEcodeli);
     try {
       const strUser = {
         strAccion: 'LOGIN',
@@ -109,12 +111,11 @@ export default function Profile({navigation}) {
       }
       const { data } = await apiCall(url, method, strUser);
       setUserEco(data[0]);
-      console.log(data)
-      data[0].strEstadoCivil !== '' ? setStrEstadoCivil(data[0].strEstadoCivil) : setStrEstadoCivil('');
-      data[0].strNivelAcademico !== '' ? setStrNivelAcademico(data[0].strNivelAcademico) : setStrNivelAcademico('');
-      data[0].strCamisa !== '' ? setStrCamisa(data[0].strCamisa) : setStrCamisa('');
-      data[0].strTPantalon !== '' ? setStrTPantalon(data[0].strTPantalon) : setStrTPantalon('');
-      data[0].strTCalzado !== '' ? setStrTCalzado(data[0].strTCalzado) : setStrTCalzado('');
+    data[0].strEstadoCivil !== '' ? setStrEstadoCivil(data[0].strEstadoCivil) : setStrEstadoCivil('');
+    data[0].strNivelAcademico !== '' ? setStrNivelAcademico(data[0].strNivelAcademico) : setStrNivelAcademico('');
+    data[0].strCamisa !== '' ? setStrCamisa(data[0].strCamisa) : setStrCamisa('');
+    data[0].strTPantalon !== '' ? setStrTPantalon(data[0].strTPantalon) : setStrTPantalon('');
+    data[0].strTCalzado !== '' ? setStrTCalzado(data[0].strTCalzado) : setStrTCalzado('');
     } catch (error) {
       console.log('Error', error);
     }

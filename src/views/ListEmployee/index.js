@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Container,Content,H3,ListItem,Left,Text,Body,Right,Button,Icon,Col,Row, Badge,Spinner } from 'native-base';
+import { Container,Content,H3,ListItem,Left,Text,Body,Right,Button,Icon,Badge, Card, CardItem } from 'native-base';
 import { SearchBar } from 'react-native-elements';
 import MyHeader from '../../components/Header';
 import apiCall from '../../redux/api';
@@ -40,21 +40,18 @@ export default function ListEmployee({route,navigation}){
     <Container>
       <MyHeader />
       <Content padder>
-        <Row style={{justifyContent: 'space-between'}}>
-          <Col style={genericStyles.leftTitle}>
-            <Button rounded onPress={() => navigation.goBack()}>
-              <Icon type='FontAwesome5' name='arrow-left' />
-            </Button>
-          </Col>
-          <Col style={genericStyles.centerTitle}>
-            <H3> {`Lista de Empleado del ${strCentroCostos} ${strDescripcionCC}`}</H3>
-          </Col>
-          <Col style={genericStyles.rightTitle}>
-            <Button transparent>
-              <Icon type='FontAwesome5' name='users' />
-            </Button>
-          </Col>
-        </Row>
+        <Card>
+          <CardItem>
+            <Left>
+              <H3> {`Lista de Empleado del ${strDescripcionCC}`}</H3>
+            </Left>
+            <Right>
+              <Button transparent>
+                <Icon type='FontAwesome5' name='users' />
+              </Button>
+            </Right>
+          </CardItem>
+        </Card>
         <SearchBar
           placeholder='Buscar...'
           onChangeText= {(e)=> setSearch(e)}
@@ -73,7 +70,7 @@ export default function ListEmployee({route,navigation}){
                 </Badge>
               </Left>
               <Body>
-                <Text style={genericStyles.textList}>{employee.strApellidoPaterno + ' ' + employee.strApellidoMaterno + ' ' + employee.strNombre}</Text>
+                <Text style={genericStyles.textList}>{`${employee.strApellidoPaterno} ${employee.strApellidoMaterno} ${employee.strNombre}`}</Text>
               </Body>
               <Right>
                 <Button transparent onPress={() => navigation.navigate('EmployeeDetail')}>

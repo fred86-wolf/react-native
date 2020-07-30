@@ -53,15 +53,5 @@ export default StyleSheet.create({
   },
   inputSearchBar:{
     backgroundColor:'#f2f2f2',
-  },
-  leftTitle:{
-    width: width / 8,
-  },
-  centerTitle:{
-    width: width / 3,
-    marginTop:10
-  },
-  rightTitle:{
-    width: width / 8,
   }
 });

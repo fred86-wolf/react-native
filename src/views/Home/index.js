@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { ScrollView, View, Image,TouchableOpacity, Linking, StatusBar} from 'react-native';
+import { ScrollView, View, Image,TouchableOpacity, Linking} from 'react-native';
 import axios from 'axios';
 import  MyHeader  from '../../components/Header';
 import apiCall from '../../redux/api/index';
@@ -16,7 +16,7 @@ export default function Home ({navigation}){
   useEffect(() => {
       listCourses();
       listAwards();
-  }, [awardsPersonal, unitsCourses]);
+  });
   const listCourses = async () => {
     const token = await getItem(ACCESS_TOKEN);
     axios.get('https://classroom.googleapis.com/v1/courses',{
@@ -97,8 +97,6 @@ export default function Home ({navigation}){
               <Text style={styles.subtitle}>  8:30 A.M.</Text>
               </Icon>
             </Card>
-            </Col>
-            <Col style={styles.lineCard}>
             </Col>
             <Col>
               <Text style={[styles.title,styles.scheduleIconText]}>HOY</Text>

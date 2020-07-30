@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Content, Form, Text, Item, Label, Spinner, Col, Icon, Row, Button, H2, View } from 'native-base';
+import { Container, Content, Form, Text, Item, Label, Col, Icon, Row, Button, H2 } from 'native-base';
 import MyHeader from '../../components/Header';
 import styles from './style';
 import genericStyles from '../../styles';
@@ -34,14 +34,9 @@ export default function EmployeeDetail({ route, navigation }) {
             <Content>
                 <Row style={{ marginHorizontal: 10, marginVertical: 10 }}>
                     <Col>
-                        <Button rounded onPress={() => navigation.goBack()} >
-                            <Icon type='FontAwesome5' name='arrow-left' />
-                        </Button>
-                    </Col>
-                    <Col>
-                        <Button rounded success>
+                        <Button rounded info>
                             <Icon type='FontAwesome5' name='check' />
-                            <Text>Asistió</Text>
+                            <Text>Doblete</Text>
                         </Button>
                     </Col>
                     <Col>
