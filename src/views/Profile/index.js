@@ -103,11 +103,10 @@ export default function Profile({navigation}) {
     let userEcodeli = await getItem(USER_ECODELI);
     userEcodeli = JSON.parse(userEcodeli);
     setUserEcodeli(userEcodeli);
-    console.log(userEcodeli);
     try {
       const strUser = {
         strAccion: 'LOGIN',
-        strUsuario: strUsuario
+        strUsuario: userEcodeli.strUsuario
       }
       const { data } = await apiCall(url, method, strUser);
       setUserEco(data[0]);

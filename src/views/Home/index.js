@@ -6,6 +6,7 @@ import apiCall from '../../redux/api/index';
 import { getItem } from '../../utils/storage';
 import { Container,Spinner, Content,Grid, Col, Text, Card, CardItem,Body, Icon,Row, Button} from 'native-base';
 import genericStyles from '../../styles';
+import Carousel from '../../components/Carousel';
 import styles from './style';
 import {ACCESS_TOKEN } from '../../consts';
 const course = require('../../../assets/cursos.png');
@@ -36,9 +37,6 @@ export default function Home ({navigation}){
     let awardsPersonal = response.data;
     setAwardsPersonal(awardsPersonal);
   }
-  const handleClassroom = (url) =>{
-    Linking.openURL(url);
-  }
     const handleAwards = () =>{
       navigation.navigate('Awards');
     }
@@ -68,26 +66,11 @@ export default function Home ({navigation}){
           </Card>
           </Row>
           <View style={{marginTop:10, alignSelf:'flex-end', marginRight:10}}>
-              <Icon type='FontAwesome5' name='book-reader' style={{color:'blue'}}/>
             </View>
-            <View style={{alignSelf:'center'}}>
+            <View style={{alignSelf:'flex-start'}}>
               <Text>Cursos</Text>
             </View>
-          <ScrollView horizontal={true}>
-            {unitsCourses && unitsCourses.map((unit) =>{
-              return (
-                <View key={unit.id} style={styles.carouselHome}>
-                <TouchableOpacity style={styles.carouselHomeInside} onPress={() => handleClassroom(unit.alternateLink)}>
-                  <Image style={styles.carouselImage} source={ course && course} />
-                </TouchableOpacity>
-                <View style={styles.carouselText}>
-                  <Text style={styles.carouselTextInside}>
-                    {unit.name}
-                  </Text>
-                </View>
-              </View>)
-            })}
-            </ScrollView>
+          <Carousel unitsCourses={unitsCourses}/>
           <Row style={styles.dateCard}>
             <Col>
             <Icon style={styles.calendarDayIcon} type='FontAwesome5' name='calendar-day'></Icon>

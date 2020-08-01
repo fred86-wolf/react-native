@@ -13,7 +13,7 @@ const IMAGE_ECO_LOGO = require('../../../assets/ecodeli-01.png');
 const BTN_ECO_LOGO = require('../../../assets/favicon.png');
 const ECO_LOGO = require('../../../assets/icono-app2.png');
 const ERROR_LOGO = require('../../../assets/error.png')
-const {iosClientId, androidClientId, iosStandaloneAppClientId, androidStandaloneAppClientId} = enviroment();
+const {iosClientId, androidClientId,iosStandaloneAppClientId, androidStandaloneAppClientId} = enviroment();
 
 export default function Login({navigation}) {
   const [loading, setLoading] = useState(false);
@@ -24,10 +24,10 @@ export default function Login({navigation}) {
     try {
       setLoading(true);
       const {type, user, accessToken} = await Google.logInAsync({
-        iosClientId, 
         androidClientId,
-        iosStandaloneAppClientId, 
+        iosClientId, 
         androidStandaloneAppClientId,
+        iosStandaloneAppClientId,
         scopes:['profile','https://www.googleapis.com/auth/classroom.courses', 'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.coursework.me']
       });
       const strUser = {
