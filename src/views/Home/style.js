@@ -1,102 +1,54 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import Constants from 'expo-constants';
+import { ALICE_BLUE, COURIOUS_BLUE, WHITE, DIM_GRAY, PRUSSIAN_BLUE, AMBER, WHISPER } from '../../consts';
 const { width,height } = Dimensions.get('window');
 
 export default StyleSheet.create({
-    containerOne:{
-        flex:2,
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    containerTwo:{
-        flex:2,
-        justifyContent:'center',
-        marginTop:4
-    },
-    containerThree:{
-        flex: 2,
-        justifyContent:'center',
-        marginTop:10,
-        backgroundColor:'#CFD8DC'
-    },
-    containerFourth:{
-        flex:2,
-        alignItems:'center',
-        justifyContent:'center'
-    },
     mainCard:{
-        height: height/5
+        height: height/5,
+        marginRight:10
     },
     cardMain:{
-        backgroundColor: '#70DB7F', 
+        backgroundColor: COURIOUS_BLUE, 
         flex:2, 
-        justifyContent:'center'
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:15
     },
     cardInside:{
         flexDirection:'column', 
         justifyContent:'center',
-        backgroundColor: '#70DB7F'
+        backgroundColor: COURIOUS_BLUE
     },
-    carouselHomeHeight:{
-        height:height/6,
-        marginTop:10
-    },
-    carouselHome:{
-        height:height/5, 
-        width:width/3,
-        borderColor:'#808080',
-        borderWidth:0.5, 
-        borderRadius:10, 
-        marginRight:5, 
-        justifyContent:'center',
-        marginTop:10
-    },
-    carouselHomeInside:{
-        flex:2
-    },
-    carouselImage:{
-        flex:1, 
-        width:null, 
-        height: null, 
-        resizeMode:'cover', 
-        borderRadius:10
-    },
-    carouselText:{
-        flex:1,
-        borderColor:'#808080', 
-        borderWidth:0.5, 
-        borderBottomLeftRadius:10, 
-        borderBottomRightRadius:10
-    },
-    carouselTextInside:{
-        alignSelf:'center'
-    },
-    title: {
+    
+    titleWhite: {
         fontSize: 25,
-        fontWeight: '400'
+        fontWeight: '400',
+        color: WHITE
     },
-    subtitle: {
-        fontSize: 20,
+    titleCardDate:{
+        fontSize:25,
+        fontWeight:'bold',
+        color: DIM_GRAY
+    },
+    subtitleSchedule: {
+        color:DIM_GRAY,
+        fontSize: 25,
         fontWeight:'200'
     },
     dateCard:{
         height:height/7,
-        backgroundColor: '#CFD8DC',
+        backgroundColor: ALICE_BLUE,
         justifyContent: 'center',
-        marginTop:20
+        marginTop:20,
+        borderRadius:10
     },
     textCenter:{
-        textAlign: 'center'
-    },
-    lineCard:{
-        marginVertical:height/18,
-        backgroundColor:'#E5E5E8',
-        width:width/50,
-        height:height/12,
-        borderRadius: 10
+        fontWeight:'normal',
+        textAlign: 'center',
+        color:PRUSSIAN_BLUE
     },
     mlIcon:{
-        color:'#ffff00',
+        color: WHITE,
         fontSize: height/6
     },
     scheduleIconText:{
@@ -106,7 +58,9 @@ export default StyleSheet.create({
     },
     scheduleIconOne:{
         marginTop:5,
-        marginStart:20
+        marginStart:20,
+        color:DIM_GRAY,
+        alignSelf:'center'
     },
     scheduleIconTwo:{
         marginTop: 10,
@@ -119,15 +73,14 @@ export default StyleSheet.create({
     },
     calendarDayIcon:{
         marginTop:10,
-        marginStart:10
+        marginStart:10,
+        color:COURIOUS_BLUE
     },
-    grayCard:{
-        backgroundColor:'#E5E5E8',
-        borderRadius: 10
-    },
+    
     seeBtn:{
         width: width / 1.5,
         justifyContent: 'center',
-        marginTop:20
+        marginTop:20,
+        alignSelf:'center'
     }
 });

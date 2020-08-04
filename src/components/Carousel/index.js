@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text, Image, ScrollView, Linking, TouchableOpacity} from 'react-native';
 import styles from './style';
 const course = require('../../../assets/cursos.png');
+
 export default function Carousel(props){
     const {unitsCourses} = props;
-    console.log(unitsCourses);
     const handleClassroom = (url) =>{
         Linking.openURL(url);
       }

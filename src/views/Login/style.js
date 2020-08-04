@@ -1,26 +1,21 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
-
+import {BLUE_LAGOON,PRUSSIAN_BLUE} from '../../consts';
 const { width,height } = Dimensions.get('window');
 
 export default StyleSheet.create({
-  content:{
-    backgroundColor:'#f0ebea'
+  linearGradient: {
+    flex: 1,
   },
   grid: {
     flexDirection: 'column'
-  },
-  loginFrm: {
-    marginTop: 20,
-    width: width / 3,
-    height: 60,
-    justifyContent: 'center',
   },
   loginBtn: {
     marginTop: 20,
     width: width / 1.5,
     height: 60,
-    justifyContent: 'center'
+    justifyContent: 'flex-start',
+    alignSelf:'center'
   },
   imageLogo:{
     marginBottom:20,
