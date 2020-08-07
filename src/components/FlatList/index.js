@@ -9,7 +9,7 @@ export default function CarouselAwards(props) {
         <FlatList
             horizontal={true}
             data={awardsPersonal}
-            keyExtractor={item => item.intID}
+            keyExtractor={item => item.intID.toString()}
             renderItem={({ item }) => (
                 <View style={styles.carouselHome}>
                     <View style={styles.carouselHomeInside}>

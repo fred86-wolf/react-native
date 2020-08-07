@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
-import {BLUE_LAGOON,PRUSSIAN_BLUE} from '../../consts';
+import {BLUE_LAGOON,PRUSSIAN_BLUE, CHARLOTTE, WHITE_SMOKE} from '../../consts';
 const { width,height } = Dimensions.get('window');
 
 export default StyleSheet.create({
@@ -11,15 +11,33 @@ export default StyleSheet.create({
     flexDirection: 'column'
   },
   loginBtn: {
-    marginTop: 20,
     width: width / 1.5,
     height: 60,
-    justifyContent: 'flex-start',
-    alignSelf:'center'
+    justifyContent: 'space-between',
+    alignSelf:'center',
+    backgroundColor:WHITE_SMOKE,
+    borderRadius:5
+  },
+  textTitle:{
+    alignSelf:'flex-start', 
+    marginLeft:10, 
+    fontWeight:'bold',
+    fontSize:40, 
+    color:WHITE_SMOKE
+  },
+  textSlogan:{
+    alignSelf:'flex-start', 
+    marginLeft:10, 
+    fontWeight:'bold',
+    color:CHARLOTTE
+  },
+  textLoginBtn:{
+    color:PRUSSIAN_BLUE
   },
   imageLogo:{
-    marginBottom:20,
-    height: 120,
+    marginVertical:height/14,
+    height:height/6.5,
+    width:width/4,
     alignSelf:'center'
   }
 });

@@ -5,7 +5,7 @@ import genericStyles from '../../styles/index';
 import { getItem, clearAll } from '../../utils/storage';
 import { USER_INFO, USER_ECODELI } from '../../consts';
 
-export function DrawerContent(props){
+export default function DrawerContent(props){
     const [userInfo, setUserInfo] = useState(null);
     const [userEcodeli, setUserEcodeli] = useState(null);
     useEffect(() => {

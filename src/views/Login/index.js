@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { Image, Button } from 'react-native';
+import { Image } from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts'
 import * as Google from 'expo-google-app-auth';
 import apiCall from '../../redux/api';
-import { Container, Text, Grid, Content, Thumbnail } from 'native-base';
+import { Button, Text, Grid, Content, Thumbnail, Icon } from 'native-base';
 import styles from './style';
 import genericStyles from '../../styles';
 import { saveItem } from '../../utils/storage';
 import { ACCESS_TOKEN, USER_INFO, SUCCESS_MESSAGE, USER_ECODELI, BLUE_LAGOON, PRUSSIAN_BLUE } from '../../consts';
 import { LinearGradient } from 'expo-linear-gradient';
 import enviroment from '../../../environment';
-// const BTN_ECO_LOGO = require('../../../assets/favicon.png');
-const ECO_LOGO = require('../../../assets/icono-app2.png');
+const ECO_LOGO = require('../../../assets/icono-app.png');
 const ERROR_LOGO = require('../../../assets/error.png')
 const { iosClientId, androidClientId, iosStandaloneAppClientId, androidStandaloneAppClientId } = enviroment();
 
@@ -61,11 +60,12 @@ export default function Login({ navigation }) {
       colors={[BLUE_LAGOON, PRUSSIAN_BLUE]} style={styles.linearGradient}>
         <Content padder contentContainerStyle={genericStyles.centeredContent}>
           <Grid style={[genericStyles.centeredGrid, styles.grid]}>
-            <Text style={{alignSelf:'flex-start', marginLeft:10, fontSize:35, color:'white'}}>Ecodeli Industrial</Text>
-            <Text style={{alignSelf:'flex-start', marginLeft:10, fontWeight:'bold',color:'white'}}>Los profesionales en limpieza</Text>
-            <Image style={{marginTop:50,width:200, height:200}} source={ECO_LOGO}/>
+            <Text style={styles.textTitle}>Ecodeli Industrial</Text>
+            <Text style={styles.textSlogan}>Los profesionales en limpieza</Text>
+            <Image style={styles.imageLogo} source={ECO_LOGO}/>
             <Button style={styles.loginBtn} onPress={handleLogin}>
-              <Text>Iniciar Sesión</Text>
+              <Text style={styles.textLoginBtn}>Iniciar Sesión</Text>
+              <Icon style={styles.textLoginBtn} type='FontAwesome5' name='long-arrow-alt-right'/>
             </Button>
             <AwesomeAlert show={loading} title='Cargando' closeOnHardwareBackPress={false} closeOnTouchOutside={true} showProgress={true} customView={renderCustomAlertLoading()} message='Por Favor Espere...' />
             <AwesomeAlert show={error} title='Error' customView={renderCustomAlertError()} message='¡Error al Iniciar Sesión!' />

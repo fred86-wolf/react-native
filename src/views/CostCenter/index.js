@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {FlatList, ScrollView} from 'react-native';
 import MyHeader from '../../components/Header';
 import apiCall from '../../redux/api';
 import genericStyles from '../../styles';
@@ -17,15 +18,16 @@ export default function CostCenter({ route, navigation }) {
     const { data } = await apiCall(url, method, obj);
       let arrayCC = data;
       setArrayCC(arrayCC);
-      if (search !== '') {
-        const newData = arrayCC.filter(item => {
-          const itemData = `${item.strCentroCostos.toUpperCase()}   
-          ${item.strDescripcionCC.toUpperCase()}`;
-          const textData = search.toUpperCase();
-          return itemData.indexOf(textData) > -1;
-        });
-        setArrayCC(newData);
-      }
+      console.log(arrayCC.length)
+      // if (search !== '') {
+      //   const newData = arrayCC.filter(item => {
+      //     const itemData = `${item.strCentroCostos.toUpperCase()}   
+      //     ${item.strDescripcionCC.toUpperCase()}`;
+      //     const textData = search.toUpperCase();
+      //     return itemData.indexOf(textData) > -1;
+      //   });
+      //   setArrayCC(newData);
+      // }
   }
   useEffect(() => {
     getCC();
@@ -72,7 +74,32 @@ export default function CostCenter({ route, navigation }) {
               </Right>
             </ListItem>)
         })} */}
+        <ScrollView>
+          <FlatList
+          data={arrayCC}
+          renderItem={renderItem}
+          keyExtractor={item => item.strCentroCostos}
+          initialNumToRender={10}/>
+        </ScrollView>
       </Content>
     </Container>
   )
 }
+
+const renderItem = ({item}) => (
+  <ListItem key={item.key} itemDivider last thumbnail>
+    <Left>
+      <Badge info>
+        <Text>{item.strCentroCostos}</Text>
+      </Badge>
+    </Left>
+    <Body>
+      <Text style={genericStyles.textList}>{item.strDescripcionCC}</Text>
+    </Body>
+    <Right>
+      <Button transparent>
+        <Icon type='FontAwesome5' name='arrow-alt-circle-right'/>
+      </Button>
+    </Right>
+  </ListItem>
+)

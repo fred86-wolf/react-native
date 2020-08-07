@@ -1,5 +1,5 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { ScrollView, View, Image, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { Container, Spinner, Content, Col, Text, Card, CardItem, Body, Icon, Row, Button } from 'native-base';
 import { ProgressChart } from 'react-native-chart-kit';
 const screenWidth = Dimensions.get('window').width;
@@ -9,8 +9,6 @@ import { getItem } from '../../utils/storage';
 const MyHeader = lazy(() => import('../../components/Header'));
 const Carousel = lazy(() => import('../../components/Carousel'));
 const CarouselAwards = lazy(()=> import('../../components/FlatList'));
-const DateCard = lazy(()=> import('../../components/DateCard'));
-import genericStyles from '../../styles';
 import styles from './style';
 import { ACCESS_TOKEN } from '../../consts';
 const course = require('../../../assets/cursos.png');
@@ -79,7 +77,7 @@ export default function Home({ navigation }) {
             <CardItem style={{ flexDirection: 'column', justifyContent: 'center' }}>
               <ProgressChart
                 data={data}
-                width={screenWidth/3}
+                width={260}
                 height={220}
                 strokeWidth={16}
                 radius={32}
@@ -89,8 +87,6 @@ export default function Home({ navigation }) {
             </CardItem>
           </Card>
         </Row>
-        <View style={{ marginTop: 10, alignSelf: 'flex-end', marginRight: 10 }}>
-        </View>
         <View style={{ alignSelf: 'flex-start' }}>
           <Text>Cursos</Text>
         </View>
@@ -113,9 +109,6 @@ export default function Home({ navigation }) {
             </Icon>
           </Col>
         </Row>
-        <Suspense fallback={<View><Text>Loading...</Text></View>}>
-          <DateCard/>
-        </Suspense>
         <View style={{ alignSelf: 'flex-start' }}>
           <Text>Premios</Text>
         </View>

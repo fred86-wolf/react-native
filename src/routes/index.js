@@ -10,7 +10,8 @@ import Profile from '../views/Profile'
 import Home from '../views/Home';
 import Loading from '../views/Loading';
 import Awards from '../views/Awards';
-import {DrawerContent} from '../components/DrawerContent';
+import DrawerContent from '../components/DrawerContent';
+// const DrawerContent = lazy(() => import('../../components/DrawerContent'));
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 

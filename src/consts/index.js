@@ -20,4 +20,6 @@ export const SUCCESS_MESSAGE = 'success';
  export const DIM_GRAY = '#747474';
  export const AMBER = '#DB9A00';
  export const WHISPER = '#EEEEEE';
+ export const WHITE_SMOKE = '#F2F2F2';
+ export const CHARLOTTE = '#A2D8EB';
 
