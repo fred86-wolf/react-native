@@ -32,7 +32,7 @@ export default function Home({ navigation }) {
   useEffect(() => {
     listCourses();
     listAwards();
-  });
+  },[awardsPersonal]);
   const listCourses = async () => {
     const token = await getItem(ACCESS_TOKEN);
     axios.get('https://classroom.googleapis.com/v1/courses', {

@@ -1,18 +1,20 @@
 import React from 'react';
-import {createNavigator} from '@react-navigation/stack';
-import CostCenter from '../views/CostCenter';
+import {createStackNavigator} from '@react-navigation/stack';
+import OpCoordinator from '../views/CostCenter';
+import CostCenter from '../views/OpCoordinator';
 import ListEmployee from '../views/ListEmployee';
 import EmployeeDetail from '../views/EmployeeDetail';
-// import OpCoordinator from '../views/OpCoordinator';
-const Stack = createNavigator();
+import Schedule from '../views/Schedule';
+const Stack = createStackNavigator();
 
 export default function RolStack(){
-    return (
+    return(
         <Stack.Navigator headerMode='none'>
+            <Stack.Screen name='OpCoordinator' component={OpCoordinator}/>
             <Stack.Screen name='CostCenter' component={CostCenter}/>
             <Stack.Screen name='ListEmployee' component={ListEmployee}/>
             <Stack.Screen name='EmployeeDetail' component={EmployeeDetail}/>
-            {/* <Stack.Screen name='OpCoordinator' component={OpCoordinator}/> */}
+            <Stack.Screen name='Schedule' component={Schedule}/>
         </Stack.Navigator>
     )
 }

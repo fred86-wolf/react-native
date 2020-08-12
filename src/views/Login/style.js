@@ -35,9 +35,9 @@ export default StyleSheet.create({
     color:PRUSSIAN_BLUE
   },
   imageLogo:{
-    marginVertical:height/14,
-    height:height/6.5,
-    width:width/4,
+    marginVertical:height/13,
+    height:height/4,
+    width:width/2.3,
     alignSelf:'center'
   }
 });

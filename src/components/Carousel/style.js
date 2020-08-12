@@ -6,7 +6,7 @@ export default StyleSheet.create({
         width:width/4,
         borderRadius:10, 
         marginRight:15,
-        marginTop:10,
+        marginVertical:10,
         backgroundColor:'#E2F1F8'
     },
     carouselHomeInside:{
@@ -23,7 +23,6 @@ export default StyleSheet.create({
         flex:1
     },
     carouselTextInside:{
-        marginTop:15,
         alignSelf:'center'
     }
 });
