@@ -3,8 +3,8 @@ import {ALICE_BLUE, WHISPER, AMBER, DIM_GRAY} from '../../consts';
 const { width,height } = Dimensions.get('window');
 export default StyleSheet.create({
     carouselHome:{
-        height:height/4.5, 
-        width:width/4,
+        height:height/3.5, 
+        width:width/3,
         borderRadius:10, 
         marginRight:15, 
         justifyContent:'center',
@@ -18,21 +18,21 @@ export default StyleSheet.create({
     },
     carouselHomeInside:{
         marginTop:15,
-        flex:2,
+        flex:3,
         marginHorizontal:10
     },
     carouselImage:{
-        flex:1, 
+        flex:6, 
         width:null, 
         height: null,
         resizeMode:'cover', 
-        borderRadius:10,
+        borderRadius:5,
         backgroundColor: ALICE_BLUE
     },
     carouselText:{
         marginHorizontal:5,
         marginVertical:5,
-        flex:1,
+        flex:3,
         borderBottomLeftRadius:10, 
         borderBottomRightRadius:10
     },
@@ -44,7 +44,7 @@ export default StyleSheet.create({
         backgroundColor: WHISPER
     },
     awardIcon:{
-        fontSize:15,
+        fontSize:12,
         color: AMBER
     },
 })

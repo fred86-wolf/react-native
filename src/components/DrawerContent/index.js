@@ -12,7 +12,7 @@ export default function DrawerContent(props){
         if (!userInfo) {
           loadUserInfo();
         }
-      },[userEcodeli]);
+      },[userEcodeli, userInfo]);
       const loadUserInfo = async () =>{
         let userInfo = await getItem(USER_INFO);
         let userEcodeli = await getItem(USER_ECODELI);
@@ -20,7 +20,6 @@ export default function DrawerContent(props){
         userInfo = JSON.parse(userInfo);
         setUserEcodeli(userEcodeli);
         setUserInfo(userInfo);
-        console.log('Rol',userEcodeli);
       }
       const logOut = async () =>{
         await clearAll();
@@ -71,7 +70,7 @@ export default function DrawerContent(props){
           </Badge>
         </Right>
       </ListItem>
-      { userEcodeli && userEcodeli.strRol === 'SUPERVISOR' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'CostCenter', params:userEcodeli})}>
+      { userEcodeli && userEcodeli.strRol === 'SUPERVISOR' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'OpCoordinator', params:userEcodeli})}>
         <Left>
           <Button>
             <Icon type='FontAwesome5' name='users' />
@@ -86,7 +85,7 @@ export default function DrawerContent(props){
           </Badge>
         </Right>
       </ListItem> : null }
-      { userEcodeli && userEcodeli.strRol === 'OPERATIVO' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'OpCoordinator', params:userEcodeli})}>
+      { userEcodeli && userEcodeli.strRol === 'OPERATIVO' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'CostCenter', params:userEcodeli})}>
         <Left>
           <Button>
             <Icon type='FontAwesome5' name='closed-captioning' />
