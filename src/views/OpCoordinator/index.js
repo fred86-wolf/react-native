@@ -32,7 +32,7 @@ export default function OpCoordinator({ route, navigation }) {
     if (route.params) {
       getCoordinators(); 
     }
-  },[arrayCoordinators]);
+  },[route.params,arrayCoordinators]);
   if (!arrayCoordinators) {
     return <AwesomeAlert show={true} title='Cargando' closeOnHardwareBackPress={false} closeOnTouchOutside={true} showProgress={true} message='Por Favor Espere...' />;
   }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react'
-import {View} from 'react-native'
 import { Container, Content, Text, Col, Icon, Row, Button, Toast} from 'native-base';
 const  MyHeader = lazy(()=> import('../../components/Header'));
 const Employee = lazy(()=> import('../../components/Employee'));
@@ -24,10 +23,7 @@ export default function EmployeeDetail({ route, navigation }) {
         setLoading(true);
         const obj = { strAccion: 'LOGIN', strUsuario: strUsuario };
         const { data } = await apiCall(url, method, obj);
-        let employee = data[0];
-        setEmployee(employee);
-        console.log(employee);
-        console.log(data);
+        setEmployee(data[0]);
         setLoading(false);
     }
     const sendAbsence = () => {

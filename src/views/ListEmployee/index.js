@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,lazy, Suspense} from 'react';
 import { Container,Content,H3,ListItem,Left,Text,Body,Right,Button,Icon,Badge, Card, CardItem } from 'native-base';
 import { SearchBar } from 'react-native-elements';
-import MyHeader from '../../components/Header';
+import Overload from '../../components/Overload';
+const MyHeader = lazy(() => import('../../components/Header'));
+const FlatListEmployee = lazy(()=> import ('../../components/ListEmployee/FlatListEmployee'))
 import apiCall from '../../redux/api';
 import genericStyles from '../../styles';
 import AwesomeAlert from 'react-native-awesome-alerts'
@@ -11,7 +13,7 @@ export default function ListEmployee({route,navigation}){
     if(route.params){
       getEmployees();
     }
-  }, [route.params]);
+  }, [route.params,arrayEmployees]);
   const method = 'POST';
   const url = 'spAppMovil_Ind';
   const [arrayEmployees, setArrayEmployees] = useState(null);
@@ -21,8 +23,7 @@ export default function ListEmployee({route,navigation}){
     setLoading(true);
     const obj = { strAccion: 'Lista_Operarios', strCentroCostos: strCentroCostos };
     const { data } = await apiCall(url, method, obj);
-    let arrayEmployees = data;
-    setArrayEmployees(arrayEmployees);
+    setArrayEmployees(data);
     setLoading(false);
     // if (search !== '') {
     //   const newData = arrayCC.filter(item => {
@@ -39,7 +40,9 @@ export default function ListEmployee({route,navigation}){
   }
   return (
     <Container>
-      <MyHeader />
+      <Suspense fallback={<Overload/>}>
+        <MyHeader />
+      </Suspense>
       <Content padder>
         <Card>
           <CardItem>
@@ -58,28 +61,9 @@ export default function ListEmployee({route,navigation}){
           containerStyle={genericStyles.searchBar}
           inputContainerStyle={genericStyles.inputSearchBar}
         /> */}
-        {arrayEmployees && arrayEmployees.map((employee, index) => {
-          return (
-            <ListItem key={index} itemDivider last thumbnail style={{ marginTop: 5 }} onPress={() => navigation.navigate('EmployeeDetail', employee)}>
-              <Left>
-                <Badge info>
-                  <Text>
-                    {index+1}
-                  </Text>
-                </Badge>
-              </Left>
-              <Body>
-                <Text style={genericStyles.textList}>{`${employee.strApellidoPaterno} ${employee.strApellidoMaterno} ${employee.strNombre}`}</Text>
-                <Text note numberOfLines={1}>{`${employee.strTurno}`}</Text>
-              </Body>
-              <Right>
-                <Button transparent>
-                  <Icon style={{ color: '#113f67' }} type='FontAwesome5' name='arrow-alt-circle-right' />
-                </Button>
-              </Right>
-            </ListItem>
-          )
-        })}
+        <Suspense fallback={<Overload/>}>
+          <FlatListEmployee arrayEmployees={arrayEmployees} navigation={navigation}/>
+        </Suspense>
       </Content>
     </Container>
   )

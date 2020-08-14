@@ -8,17 +8,14 @@ const uri = 'https://facebook.github.io/react-native/docs/assets/favicon.png';
 export default function Awards(){
     const [awardsPersonal, setAwardsPersonal] = useState(null);
     useEffect(() => {
-        if(!awardsPersonal){
-            listAwards();
-        }
-    });
+        listAwards();
+    },[awardsPersonal]);
     const listAwards = async () => {
         const url = 'spAppMovil_Ind';
         const method = 'POST';
-        const data = {strAccion: 'CONCEPTOS'};
-        const response = await apiCall(url,method, data);
-        let awardsPersonal = response.data;
-        setAwardsPersonal(awardsPersonal);
+        const obj = {strAccion: 'CONCEPTOS'};
+        const {data} = await apiCall(url,method, obj);
+        setAwardsPersonal(data);
       }
     if (!awardsPersonal) {
         return <Spinner color='blue' />;
