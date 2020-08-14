@@ -1,8 +1,8 @@
 import React from 'react'
 import { FlatList, View, Text, Image } from 'react-native';
 import styles from './style';
-import {Icon} from 'native-base';
-const course = require('../../../assets/cursos.png');
+import {Icon, Card} from 'native-base';
+const course = require('../../../../assets/cursos.png');
 export default function CarouselAwards(props) {
     const { awardsPersonal } = props;
     return (
@@ -11,7 +11,7 @@ export default function CarouselAwards(props) {
             data={awardsPersonal}
             keyExtractor={item => item.intID.toString()}
             renderItem={({ item }) => (
-                <View style={styles.carouselHome}>
+                <Card style={styles.carouselHome}>
                     <View style={styles.carouselHomeInside}>
                         <Image style={styles.carouselImage} source={course && course} />
                     </View>
@@ -23,7 +23,7 @@ export default function CarouselAwards(props) {
                             <Icon style={styles.awardIcon} type='FontAwesome5' name='star-half-alt' /> {item.intPuntaje} pts 
                         </Text>
                     </View>
-                </View>
+                </Card>
             )}
         />
     )

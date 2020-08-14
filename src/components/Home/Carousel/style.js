@@ -2,8 +2,8 @@ import {StyleSheet, Dimensions} from 'react-native';
 const { width,height } = Dimensions.get('window');
 export default StyleSheet.create({
     carouselHome:{
-        height:height/5, 
-        width:width/4,
+        height:height/3.5, 
+        width:width/3,
         borderRadius:10, 
         marginRight:15,
         marginVertical:10,

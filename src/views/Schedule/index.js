@@ -1,13 +1,14 @@
 import React, { lazy, Suspense } from 'react';
 import { View } from 'react-native';
 import { Container, Content, List, ListItem, Text, Left, Body, Right,H3 } from 'native-base';
+import Overload from '../../components/Overload';
 const MyHeader = lazy(() => import('../../components/Header'));
 
 export default function Schedule({ route }) {
     console.log(route.params);
     return (
         <Container>
-            <Suspense fallback={<View><Text>Loading...</Text></View>}>
+            <Suspense fallback={<Overload/>}>
                 <MyHeader />
             </Suspense>
             <Content>

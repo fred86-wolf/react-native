@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Dimensions} from 'react-native';
 import {Icon, Card} from 'native-base';
 import { ProgressChart } from 'react-native-chart-kit';
-import {WHITE,COURIOUS_BLUE} from '../../consts';
+import {WHITE,COURIOUS_BLUE} from '../../../consts';
 const { width,height } = Dimensions.get('window');
 const data = {data: [0.8]};
 const chartConfig = {

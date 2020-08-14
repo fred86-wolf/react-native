@@ -7,7 +7,7 @@ import styles from './style';
 import { Container, H3, Content, ListItem, Text, CardItem, Body, Card, Icon, Button, Left, Right, Badge } from 'native-base';
 import { SearchBar } from 'react-native-elements';
 import AwesomeAlert from 'react-native-awesome-alerts';
-
+import Overload from '../../components/Overload';
 export default function OpCoordinator({ route, navigation }) {
   const { strUsuario } = route.params;
   const method = 'POST';
@@ -38,7 +38,7 @@ export default function OpCoordinator({ route, navigation }) {
   }
   return (
     <Container>
-      <Suspense fallback={<View><Text>Loading...</Text></View>}>
+      <Suspense fallback={<Overload/>}>
         <MyHeader />
       </Suspense>      
       <Content padder>

@@ -1,37 +1,22 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { View, Dimensions, ActivityIndicator } from 'react-native';
-import { Container, Content, Col, Text, Card, CardItem, Body, Icon, Row, Button } from 'native-base';
-import { ProgressChart } from 'react-native-chart-kit';
-const { width,height } = Dimensions.get('window');
+import { View } from 'react-native';
+import { Container, Content, Text, Button } from 'native-base';
 import axios from 'axios';
 import apiCall from '../../redux/api/index';
 import { getItem } from '../../utils/storage';
 const MyHeader = lazy(() => import('../../components/Header'));
-const Carousel = lazy(() => import('../../components/Carousel'));
-const CarouselAwards = lazy(() => import('../../components/FlatList'));
-const TimeClock = lazy(() => import('../../components/TimeClock'));
-const Scores = lazy(() => import('../../components/Scores'));
+const Carousel = lazy(() => import('../../components/Home/Carousel'));
+const CarouselAwards = lazy(() => import('../../components/Home/FlatList'));
+const TimeClock = lazy(() => import('../../components/Home/TimeClock'));
+const Scores = lazy(() => import('../../components/Home/Scores'));
+import Overload from '../../components/Overload';
 import styles from './style';
-import { ACCESS_TOKEN, COURIOUS_BLUE } from '../../consts';
-const course = require('../../../assets/cursos.png');
-const data = {
-  data: [0.8]
-};
-const chartConfig = {
-  backgroundGradientFrom: "#efefef",
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "#efefef",
-  color: (opacity = 1) => `rgba(254, 186, 0, ${opacity})`,
-  strokeWidth: 1,
-  barPercentage: 0.2,
-  useShadowColorFromDataset: false,
-  barRadius: 2,
-};
+import { ACCESS_TOKEN } from '../../consts';
 export default function Home({ navigation }) {
   const [awardsPersonal, setAwardsPersonal] = useState(null);
   const [unitsCourses, setUnitsCourses] = useState(null);
   useEffect(() => {
-    // listCourses();
+    listCourses();
     listAwards();
   }, [awardsPersonal]);
   const listCourses = async () => {
@@ -57,46 +42,30 @@ export default function Home({ navigation }) {
     navigation.navigate('Awards');
   }
   if (!awardsPersonal) {
-    return <ActivityIndicator color={COURIOUS_BLUE}/>;
+    return <Overload/>;
   }
   return (
     <Container>
-      <Suspense fallback={<View><ActivityIndicator color={COURIOUS_BLUE}/></View>}>
+      <Suspense fallback={<Overload/>}>
         <MyHeader />
       </Suspense>
       <Content padder>
-        <Suspense fallback={<View><ActivityIndicator color={COURIOUS_BLUE}/></View>}>
+        <Suspense fallback={<Overload/>}>
           <Scores />
         </Suspense>
-        <View style={{ alignSelf: 'flex-start' }}>
+        <View>
           <Text>Cursos</Text>
         </View>
-        <Suspense fallback={<View><ActivityIndicator color={COURIOUS_BLUE}/></View>}>
+        <Suspense fallback={<Overload/>}>
           <Carousel unitsCourses={unitsCourses} />
         </Suspense>
-        <Row style={styles.dateCard}>
-          <Col>
-            <Icon style={styles.calendarDayIcon} type='FontAwesome5' name='calendar-alt'></Icon>
-            <Text style={styles.textCenter}>Entrada</Text>
-            <Icon style={styles.scheduleIconOne} type='FontAwesome5' name='stopwatch'>
-              <Text style={styles.subtitleSchedule}>  8:30 A.M.</Text>
-            </Icon>
-          </Col>
-          <Col>
-            <Text style={[styles.titleCardDate, styles.scheduleIconText]}>Hoy</Text>
-            <Text style={styles.textCenter}>Salida</Text>
-            <Icon style={styles.scheduleIconOne} type='FontAwesome5' name='stopwatch'>
-              <Text style={styles.subtitleSchedule}>  8:30 A.M.</Text>
-            </Icon>
-          </Col>
-        </Row>
-        {/* <Suspense fallback={<View><Text>Loading...</Text></View>}>
+        <Suspense fallback={<Overload/>}>
           <TimeClock />
-        </Suspense> */}
-        <View style={{ alignSelf: 'flex-start' }}>
+        </Suspense>
+        <View>
           <Text>Premios</Text>
         </View>
-        <Suspense fallback={<View><ActivityIndicator color={COURIOUS_BLUE}/></View>}>
+        <Suspense fallback={<Overload/>}>
           <CarouselAwards awardsPersonal={awardsPersonal} />
         </Suspense>
         <Button rounded style={styles.seeBtn} onPress={handleAwards}><Text> Ver Más </Text></Button>

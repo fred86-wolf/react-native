@@ -1,5 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {ALICE_BLUE, WHISPER, AMBER, DIM_GRAY} from '../../consts';
+import {ALICE_BLUE, WHISPER, AMBER, DIM_GRAY} from '../../../consts';
 const { width,height } = Dimensions.get('window');
 export default StyleSheet.create({
     carouselHome:{
@@ -9,12 +9,7 @@ export default StyleSheet.create({
         marginRight:15, 
         justifyContent:'center',
         marginTop:10,
-        marginBottom:10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,  
-        elevation: 5
+        marginBottom:10
     },
     carouselHomeInside:{
         marginTop:15,

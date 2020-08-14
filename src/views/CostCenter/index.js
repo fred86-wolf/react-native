@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { View } from 'react-native';
 import { Container, Content, H3, ListItem, Left, Text, Body, Right, Button, Icon, Badge, Card, CardItem } from 'native-base';
 const MyHeader = lazy(() => import('../../components/Header'));
+import Overload from '../../components/Overload';
 import genericStyles from '../../styles';
 import apiCall from '../../redux/api';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -25,7 +26,7 @@ export default function CostCenter({ route, navigation }) {
     }
     return (
         <Container>
-            <Suspense fallback={<View><Text>Loading...</Text></View>}>
+            <Suspense fallback={<Overload/>}>
                 <MyHeader />
             </Suspense>
             <Content>

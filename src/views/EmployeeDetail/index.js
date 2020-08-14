@@ -3,17 +3,19 @@ import {View} from 'react-native'
 import { Container, Content, Text, Col, Icon, Row, Button, Toast} from 'native-base';
 const  MyHeader = lazy(()=> import('../../components/Header'));
 const Employee = lazy(()=> import('../../components/Employee'));
+import Overload from '../../components/Overload';
 import styles from './style';
 import genericStyles from '../../styles';
 import apiCall from '../../redux/api';
 import AwesomeAlert from 'react-native-awesome-alerts';
 export default function EmployeeDetail({ route, navigation }) {
     const { strUsuario } = route.params;
+    console.log(route.params);
     useEffect(() => {
         if (route.params) {
             getEmployee();
           }
-    }, [route.params]);
+    }, [route.params, employee]);
     const method = 'POST';
     const url = 'spAppMovil_Ind';
     const [loading, setLoading] = useState(false);
@@ -24,6 +26,8 @@ export default function EmployeeDetail({ route, navigation }) {
         const { data } = await apiCall(url, method, obj);
         let employee = data[0];
         setEmployee(employee);
+        console.log(employee);
+        console.log(data);
         setLoading(false);
     }
     const sendAbsence = () => {
@@ -43,7 +47,7 @@ export default function EmployeeDetail({ route, navigation }) {
     }
     return (
         <Container>
-            <Suspense fallback={<View><Text>Loading...</Text></View>}>
+            <Suspense fallback={<Overload/>}>
                 <MyHeader />
             </Suspense>
             <Content>
@@ -61,7 +65,7 @@ export default function EmployeeDetail({ route, navigation }) {
                         </Button>
                     </Col>
                 </Row>
-                <Suspense fallback={<View><Text>Loading...</Text></View>}>
+                <Suspense fallback={<Overload/>}>
                     <Employee employee={employee}/>
                 </Suspense>
             </Content>

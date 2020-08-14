@@ -5,6 +5,7 @@ import {Container, Content, Button,Text, Thumbnail,Icon, Spinner, Form, Item, La
 import styles from './style';
 import genericStyles from '../../styles';
 const MyHeader = lazy(() => import('../../components/Header'));
+import Overload from '../../components/Overload';
 import { getItem } from '../../utils/storage';
 import {USER_INFO, USER_ECODELI} from '../../consts';
 import moment from 'moment';
@@ -162,11 +163,11 @@ export default function Profile({navigation}) {
     }
   },[strEstadoCivil,strNivelAcademico,strCamisa,strTPantalon,strTCalzado]);
   if (!userInfo || !userEco) {
-    return <Spinner color='blue' />
+    return <Overload/>
   }
   return (
     <Container>
-      <Suspense fallback={<View><Text>Loading...</Text></View>}>
+      <Suspense fallback={<Overload/>}>
         <MyHeader />
       </Suspense>
       <Content contentContainerStyle={genericStyles.centeredContent} padder>
