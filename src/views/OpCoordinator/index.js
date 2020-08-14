@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { FlatList, ScrollView, View } from 'react-native';
+import { FlatList, SafeAreaView, View, TouchableOpacity } from 'react-native';
 const MyHeader = lazy(() => import('../../components/Header'));
 import apiCall from '../../redux/api';
 import genericStyles from '../../styles';
@@ -9,6 +9,20 @@ import { SearchBar } from 'react-native-elements';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Overload from '../../components/Overload';
 export default function OpCoordinator({ route, navigation }) {
+  const DATA = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Second Item',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Third Item',
+    },
+  ];
   const { strUsuario } = route.params;
   const method = 'POST';
   const url = 'spAppMovil_Ind';
@@ -54,9 +68,9 @@ export default function OpCoordinator({ route, navigation }) {
           containerStyle={genericStyles.searchBar}
           inputContainerStyle={genericStyles.inputSearchBar}
         /> */}
-        {arrayCoordinators && arrayCoordinators.map((coordinator, index) => {
+        {arrayCoordinators ? arrayCoordinators.map((coordinator, index) => {
           return (
-            <ListItem key={index} itemDivider last thumbnail style={{ marginTop: 5 }} onPress={() => navigation.navigate('CostCenter', coordinator)}>
+            <ListItem key={index} itemDivider last thumbnail style={{ marginTop: 5, marginLeft:1, borderRadius:10}} onPress={() => navigation.navigate('CostCenter', coordinator)}>
               <Left>
                 <Badge info>
                   <Text>{index+1}</Text>
@@ -71,8 +85,8 @@ export default function OpCoordinator({ route, navigation }) {
                 </Button>
               </Right>
             </ListItem>)
-        })}
+        }): <View><Text>No Tienes Coordinadores Operativos</Text></View>}
       </Content>
     </Container>
   )
-}
+};

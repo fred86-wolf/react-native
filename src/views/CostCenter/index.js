@@ -27,7 +27,7 @@ export default function CostCenter({ route, navigation }) {
             <Suspense fallback={<Overload />}>
                 <MyHeader />
             </Suspense>
-            <Content>
+            <Content padder>
                 <Card>
                     <CardItem bordered>
                         <H3>Centros de Costos</H3>

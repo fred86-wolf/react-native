@@ -46,7 +46,7 @@ export default function EmployeeDetail({ route, navigation }) {
             <Suspense fallback={<Overload/>}>
                 <MyHeader />
             </Suspense>
-            <Content>
+            <Content padder>
                 <Row style={{ marginHorizontal: 10, marginVertical: 10 }}>
                     <Col>
                         <Button rounded info onPress={doubleShift}>
