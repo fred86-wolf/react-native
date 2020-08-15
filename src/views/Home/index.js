@@ -9,14 +9,16 @@ const Carousel = lazy(() => import('../../components/Home/Carousel'));
 const CarouselAwards = lazy(() => import('../../components/Home/FlatList'));
 const TimeClock = lazy(() => import('../../components/Home/TimeClock'));
 const Scores = lazy(() => import('../../components/Home/Scores'));
+const RollCall = lazy(() => import ('../../components/Home/RollCall'));
 import Overload from '../../components/Overload';
 import styles from './style';
 import { ACCESS_TOKEN } from '../../consts';
 export default function Home({ navigation }) {
+  const [watch, setWatch] = useState(false);
   const [awardsPersonal, setAwardsPersonal] = useState(null);
   const [unitsCourses, setUnitsCourses] = useState(null);
   useEffect(() => {
-    listCourses();
+    // listCourses();
     listAwards();
   }, [awardsPersonal]);
   const listCourses = async () => {
@@ -59,9 +61,13 @@ export default function Home({ navigation }) {
         <Suspense fallback={<Overload/>}>
           <Carousel unitsCourses={unitsCourses} />
         </Suspense>
+        { watch ? 
         <Suspense fallback={<Overload/>}>
           <TimeClock />
-        </Suspense>
+        </Suspense> : 
+        <Suspense fallback={<Overload/>}>
+        <RollCall/>
+        </Suspense>}
         <View>
           <Text>Premios</Text>
         </View>

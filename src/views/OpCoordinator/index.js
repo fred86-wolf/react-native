@@ -40,7 +40,7 @@ export default function OpCoordinator({ route, navigation }) {
     //     return itemData.indexOf(textData) > -1;
     //   });
     //   setArrayCC(newData);
-    // }
+    // } 
   }
   useEffect(() => {
     if (route.params) {

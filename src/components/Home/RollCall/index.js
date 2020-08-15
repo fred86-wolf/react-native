@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, TouchableHighlight} from 'react-native';
-import {Icon, Text} from 'native-base';
-import {DIM_GRAY,COURIOUS_BLUE,PRUSSIAN_BLUE, ALICE_BLUE} from '../../../consts';
-export default function TimeClock(){
-    return (
-        <View style={{ flexDirection: 'row' , backgroundColor:ALICE_BLUE, borderRadius:10, marginVertical:10}}>
+import {Text, Icon} from 'native-base';
+import {ALICE_BLUE, PRUSSIAN_BLUE, COURIOUS_BLUE, DIM_GRAY} from '../../../consts';
+
+export default function RollCall(){
+    return(
+        <View style={{ flexDirection: 'row' , backgroundColor:ALICE_BLUE, borderRadius:10, marginVertical:5}}>
             <View style={{flex:3}}>
                 <View style={{flex:2, marginVertical:5,marginLeft:10}}>
                     <TouchableHighlight>
@@ -14,11 +15,6 @@ export default function TimeClock(){
                 <View style={{ flex:2,alignSelf:'center'}}>
                     <Text style={{color:PRUSSIAN_BLUE}}>Entrada</Text>
                 </View>
-                <View style={{flex:2,alignSelf:'center', marginVertical:10}}>
-                    <Icon style={{color:DIM_GRAY}} type='FontAwesome5' name='stopwatch'>
-                        <Text style={{color:DIM_GRAY,fontSize:25,fontWeight:'100'}}>  8:30 A.M.</Text>
-                    </Icon>
-                </View>
             </View>
             <View style={{flex:3}}>
                 <View style={{flex:2,marginVertical:5, marginLeft:-20}}>
@@ -26,11 +22,6 @@ export default function TimeClock(){
                 </View>
                 <View style={{flex:2, alignSelf:'center'}}>
                     <Text style={{color:PRUSSIAN_BLUE}}>Salida</Text>
-                </View>
-                <View style={{flex:2,alignSelf:'center', marginVertical:10}}>
-                    <Icon style={{color:DIM_GRAY}} type='FontAwesome5' name='stopwatch'>
-                        <Text style={{color:DIM_GRAY,fontSize:25, fontWeight:'100'}}>  3:00 PM</Text>
-                    </Icon>
                 </View>
             </View>
         </View>
