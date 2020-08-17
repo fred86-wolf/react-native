@@ -22,4 +22,6 @@ export const SUCCESS_MESSAGE = 'success';
  export const WHISPER = '#EEEEEE';
  export const WHITE_SMOKE = '#F2F2F2';
  export const CHARLOTTE = '#A2D8EB';
+ export const MADANG = '#ADE498';
+ export const RADICAL_RED ='#EB4559';
 

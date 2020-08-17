@@ -12,9 +12,10 @@ const Scores = lazy(() => import('../../components/Home/Scores'));
 const RollCall = lazy(() => import ('../../components/Home/RollCall'));
 import Overload from '../../components/Overload';
 import styles from './style';
-import { ACCESS_TOKEN } from '../../consts';
+import { ACCESS_TOKEN, USER_ECODELI } from '../../consts';
 export default function Home({ navigation }) {
-  const [watch, setWatch] = useState(false);
+  const [watch, setWatch] = useState('');
+  const [userEcodeli, setUserEcodeli] = useState (null);
   const [awardsPersonal, setAwardsPersonal] = useState(null);
   const [unitsCourses, setUnitsCourses] = useState(null);
   useEffect(() => {
@@ -40,6 +41,19 @@ export default function Home({ navigation }) {
     let awardsPersonal = response.data;
     setAwardsPersonal(awardsPersonal);
   }
+  useEffect(() => {
+    getClockRollCall();
+  },[watch])
+  const getClockRollCall = async () => {
+    let userEcodeli = await getItem(USER_ECODELI);
+    userEcodeli = JSON.parse(userEcodeli);
+    setUserEcodeli(userEcodeli);
+    const url = 'spAppMovil_Ind';
+    const method = 'POST';
+    const obj = { strAccion:'RelojAsistencia', strPersonal:userEcodeli.strUsuario };
+    const {data} = await apiCall(url, method, obj);
+    setWatch(data);
+  }
   const handleAwards = () => {
     navigation.navigate('Awards');
   }
@@ -61,12 +75,12 @@ export default function Home({ navigation }) {
         <Suspense fallback={<Overload/>}>
           <Carousel unitsCourses={unitsCourses} />
         </Suspense>
-        { watch ? 
+        { watch === 'No' ?
         <Suspense fallback={<Overload/>}>
-          <TimeClock />
+          <TimeClock/>
         </Suspense> : 
         <Suspense fallback={<Overload/>}>
-        <RollCall/>
+        <RollCall watch={watch}/>
         </Suspense>}
         <View>
           <Text>Premios</Text>

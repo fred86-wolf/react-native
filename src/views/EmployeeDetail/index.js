@@ -9,7 +9,6 @@ import apiCall from '../../redux/api';
 import AwesomeAlert from 'react-native-awesome-alerts';
 export default function EmployeeDetail({ route, navigation }) {
     const { strUsuario } = route.params;
-    console.log(route.params);
     useEffect(() => {
         if (route.params) {
             getEmployee();
@@ -23,6 +22,10 @@ export default function EmployeeDetail({ route, navigation }) {
         setLoading(true);
         const obj = { strAccion: 'LOGIN', strUsuario: strUsuario };
         const { data } = await apiCall(url, method, obj);
+        if (data.length <= 0) {
+            setLoading(false);
+            navigation.goBack();
+        }
         setEmployee(data[0]);
         setLoading(false);
     }

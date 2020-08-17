@@ -1,5 +1,5 @@
 import React, {useState, useEffect, lazy, Suspense} from 'react';
-import {View, Alert} from 'react-native';
+import {View, Alert, TouchableHighlight} from 'react-native';
 import apiCall from '../../redux/api';
 import {Container, Content, Button,Text, Thumbnail,Icon, Spinner, Form, Item, Label,Input,Picker, ListItem, Left,Right,Body,Row, Badge, DatePicker, Textarea } from 'native-base';
 import styles from './style';
@@ -161,7 +161,7 @@ export default function Profile({navigation}) {
       getPantalones();
       getCalzados();
     }
-  },[strEstadoCivil,strNivelAcademico,strCamisa,strTPantalon,strTCalzado]);
+  },[userInfo,strEstadoCivil,strNivelAcademico,strCamisa,strTPantalon,strTCalzado]);
   if (!userInfo || !userEco) {
     return <Overload/>
   }
@@ -172,6 +172,8 @@ export default function Profile({navigation}) {
       </Suspense>
       <Content contentContainerStyle={genericStyles.centeredContent} padder>
         <Thumbnail large style={styles.profileImage} source={{ uri: userInfo.photoUrl }} />
+        <TouchableHighlight>   
+        </TouchableHighlight>
       </Content>
     </Container>
   );
