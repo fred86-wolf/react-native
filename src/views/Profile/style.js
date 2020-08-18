@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions} from 'react-native';
 import Constants from 'expo-constants';
-
+import {PRUSSIAN_BLUE, WHITE_SMOKE} from '../../consts';
 const { width,height } = Dimensions.get('window');
 
 export default StyleSheet.create({
@@ -12,15 +12,18 @@ export default StyleSheet.create({
     height: width / 3,
     alignSelf:'center'
   },
-  btnOne: {
-  width: width/1.1,
-  marginTop:10
-  },
   saveBtn: {
+    backgroundColor:PRUSSIAN_BLUE,
     marginTop: 10,
     width: width / 1.5,
-    height: height/13,
+    height: height/10,
     alignSelf:'center',
-    justifyContent: 'center'
+    justifyContent:'space-around',
+    borderRadius:10
+  },
+  textBtn:{
+    color:WHITE_SMOKE, 
+    fontWeight:'bold', 
+    fontSize:20
   }
 });

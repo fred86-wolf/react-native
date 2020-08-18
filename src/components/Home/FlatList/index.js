@@ -1,12 +1,13 @@
 import React from 'react'
-import { FlatList, View, Text, Image } from 'react-native';
+import {SafeAreaView, FlatList, View, Text, Image } from 'react-native';
 import styles from './style';
 import {Icon, Card} from 'native-base';
 const course = require('../../../../assets/cursos.png');
 export default function CarouselAwards(props) {
     const { awardsPersonal } = props;
     return (
-        <FlatList
+        <SafeAreaView>
+            <FlatList
             horizontal={true}
             data={awardsPersonal}
             keyExtractor={item => item.intID.toString()}
@@ -26,5 +27,6 @@ export default function CarouselAwards(props) {
                 </Card>
             )}
         />
+        </SafeAreaView>
     )
 }

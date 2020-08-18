@@ -1,23 +1,23 @@
-import React, {useState, useEffect, lazy, Suspense} from 'react';
-import {View, Alert, TouchableHighlight} from 'react-native';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import {Alert, ScrollView} from 'react-native';
 import apiCall from '../../redux/api';
-import {Container, Content, Button,Text, Thumbnail,Icon, Spinner, Form, Item, Label,Input,Picker, ListItem, Left,Right,Body,Row, Badge, DatePicker, Textarea } from 'native-base';
+import { Container, Content, Button, Text, Thumbnail, Icon } from 'native-base';
 import styles from './style';
 import genericStyles from '../../styles';
 const MyHeader = lazy(() => import('../../components/Header'));
+const DetailProfile = lazy(() => import('../../components/Profile/DetailProfile'));
+const BenefitsProfile = lazy(() => import('../../components/Profile/BenefitsProfile'));
+const HealthProfile = lazy(() => import('../../components/Profile/HealthProfile'));
 import Overload from '../../components/Overload';
 import { getItem } from '../../utils/storage';
-import {USER_INFO, USER_ECODELI} from '../../consts';
+import { USER_INFO, USER_ECODELI} from '../../consts';
 import moment from 'moment';
 import 'moment/locale/es';
 moment.locale('es');
 
-export default function Profile({navigation}) {
+export default function Profile({ navigation }) {
   const method = 'POST';
   const url = 'spAppMovil_Ind';
-  const [openOne, setOpenOne] = useState(false);
-  const [openTwo, setOpenTwo] = useState(false);
-  const [openThree, setOpenThree] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [userEco, setUserEco] = useState(null);
   const [userEcodeli, setUserEcodeli] = useState(null);
@@ -33,41 +33,32 @@ export default function Profile({navigation}) {
   const [strEstadoCivil, setStrEstadoCivil] = useState('');
   const [frmDataUserEco, setFrmDataUserEco] = useState(defaultFrmValue());
   const onChange = (e, type) => {
-    setFrmDataUserEco({...frmDataUserEco, [type]: e.nativeEvent.text });
+    setFrmDataUserEco({ ...frmDataUserEco, [type]: e.nativeEvent.text });
   }
-  function defaultFrmValue() {
+  function defaultFrmValue(userEco) {
     return {
-      strEstado: '',
-      strPoblacion: '',
-      strDireccion: '',
-      strDireccionNumero: '',
-      strDireccionNumeroInt: '',
-      strTelefono: '',
-      strCodigoPostal: '',
-      strNombreContacto: '',
-      strTelefonoContacto: '',
-      strBeneficiario: '',
-      strParentesco: '',
-      strParentesco2: '',
-      strParentesco2: '',
-      strBeneficiario3: '',
-      strParentesco3: '',
-      strBeneficiario4: '',
-      strParentesco4: '',
-      strEnfermedad: '',
-      strAlergias: '',
-      dblEstatura: 0.00,
-      dblPeso: 0.00
+      strEstado: userEco.strEstado || '',
+      strPoblacion: userEco.strPoblacion || '',
+      strDireccion: userEco.strDireccion || '',
+      strDireccionNumero: userEco.strDireccionNumero || '',
+      strDireccionNumeroInt: userEco.strDireccionNumeroInt || '',
+      strTelefono: userEco.strTelefono || '',
+      strCodigoPostal: userEco.strCodigoPostal || '',
+      strNombreContacto: userEco.strNombreContacto || '',
+      strTelefonoContacto: userEco.strTelefonoContacto || '',
+      strBeneficiario: userEco.strBeneficiario || '',
+      strParentesco: userEco.strParentesco || '',
+      strBeneficiario2: userEco.strBeneficiario2 || '',
+      strParentesco2: userEco.strParentesco2 || '',
+      strBeneficiario3: userEco.strBeneficiario3 || '',
+      strParentesco3: userEco.strParentesco3 || '',
+      strBeneficiario4: userEco.strBeneficiario4 || '',
+      strParentesco4: userEco.strParentesco4 || '',
+      strEnfermedad: userEco.strEnfermedad || '',
+      strAlergias: userEco.strAlergias || '',
+      dblEstatura: userEco.dblEstatura || 0.00,
+      dblPeso: userEco.dblPeso || 0.00
     }
-  }
-  const sectionOne = () => {
-    setOpenOne(!openOne);
-  }
-  const sectionTwo = () => {
-    setOpenTwo(!openTwo);
-  }
-  const sectionThree = () => {
-    setOpenThree(!openThree);
   }
   const getEdoCivils = async () => {
     const obj = { strAccion: 'EDO_CIVIL' };
@@ -111,45 +102,46 @@ export default function Profile({navigation}) {
       }
       const { data } = await apiCall(url, method, strUser);
       setUserEco(data[0]);
-    setStrEstadoCivil(data[0].strEstadoCivil);
-    setStrNivelAcademico(data[0].strNivelAcademico);
-    setStrCamisa(data[0].strCamisa);
-    setStrTPantalon(data[0].strTPantalon);
-    setStrTCalzado(data[0].strTCalzado);
+      setStrEstadoCivil(data[0].strEstadoCivil);
+      setStrNivelAcademico(data[0].strNivelAcademico);
+      setStrCamisa(data[0].strCamisa);
+      setStrTPantalon(data[0].strTPantalon);
+      setStrTCalzado(data[0].strTCalzado);
     } catch (error) {
       console.log('Error', error);
     }
   }
-  const onSaveData = async () => {
-    setStrEstadoCivil(strEstadoCivil);
-    setStrNivelAcademico(strNivelAcademico);
-    setStrCamisa(strCamisa);
-    setStrTPantalon(strTPantalon);
-    setStrTCalzado(strTCalzado);
-    try {
-      setFrmDataUserEco({
-        ...frmDataUserEco, strEstadoCivil, strNivelAcademico, strCamisa, strTPantalon, strTCalzado,
-        strAccion: 'INSERT_SOLICITUD', strUsuario: userEco.strUsuario, strCentroCostos: userEco.strCentroCostos,
-        strNombre: userEco.strNombre, strApellidoPaterno: userEco.strApellidoPaterno, strApellidoMaterno: userEco.strApellidoMaterno
-      });
-      const data = frmDataUserEco;
-      const response = await apiCall(url, method, data);
-      if (response.data[0].strAccion == 'OK') {
-        Alert.alert(
-          '¡Bien Hecho!',
-          'Tus datos serán Actualizados en breve',
-          [
-            {
-              text: 'OK',
-              onPress: () => navigation.navigate('Home'),
-              style: 'success'
-            }
-          ]
-        );
-      }
-    } catch (e) {
-      alert('¡Error, Intente mas Tarde!', e);
-    }
+  const onSaveData = () => {
+    console.log(frmDataUserEco);
+    // setStrEstadoCivil(strEstadoCivil);
+    // setStrNivelAcademico(strNivelAcademico);
+    // setStrCamisa(strCamisa);
+    // setStrTPantalon(strTPantalon);
+    // setStrTCalzado(strTCalzado);
+    // try {
+    //   setFrmDataUserEco({
+    //     ...frmDataUserEco, strEstadoCivil, strNivelAcademico, strCamisa, strTPantalon, strTCalzado,
+    //     strAccion: 'INSERT_SOLICITUD', strUsuario: userEco.strUsuario, strCentroCostos: userEco.strCentroCostos,
+    //     strNombre: userEco.strNombre, strApellidoPaterno: userEco.strApellidoPaterno, strApellidoMaterno: userEco.strApellidoMaterno
+    //   });
+    //   const data = frmDataUserEco;
+    //   const response = await apiCall(url, method, data);
+    //   if (response.data[0].strAccion == 'OK') {
+    //     Alert.alert(
+    //       '¡Bien Hecho!',
+    //       'Tus datos serán Actualizados en breve',
+    //       [
+    //         {
+    //           text: 'OK',
+    //           onPress: () => navigation.navigate('Home'),
+    //           style: 'success'
+    //         }
+    //       ]
+    //     );
+    //   }
+    // } catch (e) {
+    //   alert('¡Error, Intente mas Tarde!', e);
+    // }
   }
   useEffect(() => {
     if (!userInfo) {
@@ -161,20 +153,33 @@ export default function Profile({navigation}) {
       getPantalones();
       getCalzados();
     }
-  },[userInfo,strEstadoCivil,strNivelAcademico,strCamisa,strTPantalon,strTCalzado]);
+  }, [userEco]);
   if (!userInfo || !userEco) {
-    return <Overload/>
+    return <Overload />
   }
   return (
     <Container>
-      <Suspense fallback={<Overload/>}>
+      <Suspense fallback={<Overload />}>
         <MyHeader />
       </Suspense>
+      <ScrollView>
       <Content contentContainerStyle={genericStyles.centeredContent} padder>
-        <Thumbnail large style={styles.profileImage} source={{ uri: userInfo.photoUrl }} />
-        <TouchableHighlight>   
-        </TouchableHighlight>
-      </Content>
+          <Thumbnail large style={styles.profileImage} source={{ uri: userInfo.photoUrl }} />
+          <Suspense fallback={<Overload/>}>
+            <DetailProfile userEco={userEco} arrayEdoCivil={arrayEdoCivil} arrayEscolaridad={arrayEscolaridad}/>
+          </Suspense>
+          <Suspense fallback={<Overload/>}>
+            <BenefitsProfile userEco={userEco} />
+          </Suspense>
+          <Suspense fallback={<Overload/>}>
+            <HealthProfile userEco={userEco} arrayCamisas={arrayCamisas} arrayPantalones={arrayPantalones} arrayCalzados={arrayCalzados}/>
+          </Suspense>
+          <Button style={styles.saveBtn} onPress={onSaveData}>
+              <Text style={styles.textBtn}>Guardar</Text>
+              <Icon  type='FontAwesome5' name='save'/>
+          </Button>
+        </Content>
+      </ScrollView>
     </Container>
   );
 };
