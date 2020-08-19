@@ -171,9 +171,9 @@ export default function Profile({ navigation }) {
           onSubmit={values => console.log('Valores desde el formik',values)}>
             {({handleChange, handleSubmit, values}) => (
             <Suspense fallback={<Overload/>}>
-              <DetailProfile userEco={values} arrayEdoCivil={arrayEdoCivil} arrayEscolaridad={arrayEscolaridad}/>
-              <BenefitsProfile userEco={values}  handleChange={handleChange} handleSubmit={handleSubmit}/>
-              <HealthProfile userEco={userEco} arrayCamisas={arrayCamisas} arrayPantalones={arrayPantalones} arrayCalzados={arrayCalzados} handleChange={handleChange} handleSubmit={handleSubmit}/>
+              <DetailProfile userEco={values} arrayEdoCivil={arrayEdoCivil} arrayEscolaridad={arrayEscolaridad} handleChange={handleChange} />
+              <BenefitsProfile userEco={values}  handleChange={handleChange}/>
+              <HealthProfile userEco={userEco} arrayCamisas={arrayCamisas} arrayPantalones={arrayPantalones} arrayCalzados={arrayCalzados} handleChange={handleChange} />
               <Button style={styles.saveBtn} onPress={handleSubmit}>
                 <Text style={styles.textBtn}>Guardar</Text>
                 <Icon  type='FontAwesome5' name='save'/>
