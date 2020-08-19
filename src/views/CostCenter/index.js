@@ -1,33 +1,48 @@
-import React from 'react';
-import  MyHeader  from '../../components/Header';
-import { Container,H3, Content,ListItem,Text,Body, Icon,Row, Button, Left,Right, Badge} from 'native-base';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { Container, Content, H3,Right, Button, Icon, Card, CardItem } from 'native-base';
+const MyHeader = lazy(() => import('../../components/Header'));
+const ListCostCenter = lazy(() => import ('../../components/CostCenter/ListCostCenter'));
+import Overload from '../../components/Overload';
+import apiCall from '../../redux/api';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
-export default function CostCenter({navigation}){
-    return(
+export default function CostCenter({ route, navigation }) {
+    const { strUsuario } = route.params;
+    const method = 'POST';
+    const url = 'spAppMovil_Ind';
+    const [arrayCC, setArrayCC] = useState(null);
+    const getCC = async () => {
+        const obj = { strAccion: 'CC_DES', strUsuario: strUsuario };
+        const { data } = await apiCall(url, method, obj);
+        setArrayCC(data);
+    }
+    useEffect(() => {
+        getCC();
+    }, [route.params, arrayCC]);
+    if (!arrayCC) {
+        return <AwesomeAlert show={true} title='Cargando' closeOnHardwareBackPress={false} closeOnTouchOutside={true} showProgress={true} message='Por Favor Espere...' />;
+    }
+    return (
         <Container>
-            <MyHeader/>
-            <Content contentContainerStyle={{backgroundColor: '#ffffff'}}>
-            <H3 style={{alignSelf:'center', marginVertical:10}}>Centros de Costos</H3>
-            <ListItem itemDivider last thumbnail style={{marginTop:5}}>
-              <Left>
-                <Badge style={{ backgroundColor: '#E5E5E8'}}>
-                  <Text>1252</Text>
-                </Badge>
-              </Left>
-              <Body>
-                <Text style={{ fontSize: 18 }}>Descripción de Centro de Costos</Text>
-                <Row>
-                  <Icon style={{fontSize:15, marginTop:5}} type='FontAwesome5'name='map-marker-alt'/>
-                  <Text style={{ fontSize: 13, marginLeft:5, marginTop:5 }}>Ubicación</Text>
-                </Row>
-              </Body>
-              <Right>
-                <Button transparent onPress={()=> navigation.navigate('ListEmployee')}>
-                  <Icon style={{color:'#113f67'}} type='FontAwesome5' name='arrow-alt-circle-right' />
-                </Button>
-              </Right>
-            </ListItem>
+            <Suspense fallback={<Overload />}>
+                <MyHeader />
+            </Suspense>
+            <Content padder>
+                <Card>
+                    <CardItem bordered>
+                        <H3>Centros de Costos</H3>
+                        <Right>
+                            <Button transparent>
+                                <Icon type='FontAwesome5' name='closed-captioning' />
+                            </Button>
+                        </Right>
+                    </CardItem>
+                </Card>
+                <Suspense fallback={<Overload/>}>
+                    <ListCostCenter arrayCC={arrayCC} navigation={navigation}/>
+                </Suspense>
             </Content>
         </Container>
+
     )
 }

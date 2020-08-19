@@ -3,18 +3,22 @@ import {Content, Button,List, ListItem,Badge, Text, Icon, Left, Body, Right, Thu
 import styles from './style';
 import genericStyles from '../../styles/index';
 import { getItem, clearAll } from '../../utils/storage';
-import { USER_INFO } from '../../consts';
+import { USER_INFO, USER_ECODELI } from '../../consts';
 
-export function DrawerContent(props){
+export default function DrawerContent(props){
     const [userInfo, setUserInfo] = useState(null);
+    const [userEcodeli, setUserEcodeli] = useState(null);
     useEffect(() => {
         if (!userInfo) {
           loadUserInfo();
         }
-      },[userInfo]);
+      },[userEcodeli, userInfo]);
       const loadUserInfo = async () =>{
         let userInfo = await getItem(USER_INFO);
+        let userEcodeli = await getItem(USER_ECODELI);
+        userEcodeli = JSON.parse(userEcodeli);
         userInfo = JSON.parse(userInfo);
+        setUserEcodeli(userEcodeli);
         setUserInfo(userInfo);
       }
       const logOut = async () =>{
@@ -66,7 +70,22 @@ export function DrawerContent(props){
           </Badge>
         </Right>
       </ListItem>
-      <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter')}>
+      { userEcodeli && userEcodeli.strRol === 'SUPERVISOR' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'OpCoordinator', params:userEcodeli})}>
+        <Left>
+          <Button>
+            <Icon type='FontAwesome5' name='users' />
+          </Button>
+        </Left>
+        <Body>
+          <Text>Coordinadores Operativos</Text>
+        </Body>
+        <Right>
+          <Badge>
+            <Text>3</Text>
+          </Badge>
+        </Right>
+      </ListItem> : null }
+      { userEcodeli && userEcodeli.strRol === 'OPERATIVO' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'CostCenter', params:userEcodeli})}>
         <Left>
           <Button>
             <Icon type='FontAwesome5' name='closed-captioning' />
@@ -80,8 +99,8 @@ export function DrawerContent(props){
             <Text>3</Text>
           </Badge>
         </Right>
-      </ListItem>
-      <ListItem icon last>
+      </ListItem> : null }
+      {userEcodeli && userEcodeli.strRol === 'OPERARIO' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'Schedule', params:userEcodeli})}>
         <Left>
           <Button>
             <Icon type='FontAwesome5' name='clipboard-list' />
@@ -95,22 +114,7 @@ export function DrawerContent(props){
             <Text>3</Text>
           </Badge>
         </Right>
-      </ListItem>
-      {/* <ListItem icon last>
-        <Left>
-          <Button>
-            <Icon type='FontAwesome5' name='address-card' />
-          </Button>
-        </Left>
-        <Body>
-          <Text style={styles.whiteText}>Concursos</Text>
-        </Body>
-        <Right>
-          <Badge>
-            <Text>1</Text>
-          </Badge>
-        </Right>
-      </ListItem> */}
+      </ListItem>: null}
       <ListItem icon last onPress={logOut}>
         <Left>
           <Button>

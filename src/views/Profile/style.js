@@ -13,7 +13,7 @@ export default StyleSheet.create({
     alignSelf:'center'
   },
   btnOne: {
-  padding: 10,
+  width: width/1.1,
   marginTop:10
   },
   saveBtn: {

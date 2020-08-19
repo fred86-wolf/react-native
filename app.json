@@ -12,8 +12,7 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splashEcoIndustrial.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#2d4256"
+      "resizeMode": "cover"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

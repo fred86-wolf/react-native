@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, Dimensions } from 'react-native';
+const { width,height } = Dimensions.get('window');
 export default StyleSheet.create({
   centeredContent: {
     flex: 1
@@ -40,5 +40,18 @@ export default StyleSheet.create({
   textProfileInfo:{
     fontSize:20,
     alignSelf:'center'
+  },
+  textList:{
+    fontSize:18
+  },
+  searchBar:{
+    marginVertical:5,
+    backgroundColor:'#ffffff',
+    borderTopColor:'#ffffff',
+    borderBottomColor:'#ffffff',
+    paddingHorizontal: width / 10
+  },
+  inputSearchBar:{
+    backgroundColor:'#f2f2f2',
   }
 });

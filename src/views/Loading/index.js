@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import {StatusBar} from 'react-native';
-import { Spinner, Container, Content, Grid } from 'native-base';
-import { ACCESS_TOKEN, USER_INFO } from '../../consts';
+import { Container, Content, Grid } from 'native-base';
+import { ACCESS_TOKEN } from '../../consts';
 import { getItem } from '../../utils/storage';
+import Overload from '../../components/Overload';
 import styles from './style';
 
 export default function Loading ({ navigation }){
@@ -24,7 +25,7 @@ export default function Loading ({ navigation }){
       <StatusBar backgroundColor='#113f67'/>
       <Content contentContainerStyle={styles.content}>
         <Grid style={styles.grid}>
-          <Spinner color='blue' />
+          <Overload/>
         </Grid>
       </Content>
     </Container>

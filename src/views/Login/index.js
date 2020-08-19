@@ -1,67 +1,83 @@
-import React ,{useState, useEffect} from 'react';
-import { Image, ActivityIndicator, StatusBar} from 'react-native';
+import React, { useState } from 'react';
+import { Image } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts'
 import * as Google from 'expo-google-app-auth';
-import * as AppAuth from 'expo-app-auth';
 import apiCall from '../../redux/api';
-import { Container,Text,Grid, Content,Button  } from 'native-base';
+import { Button, Text, Grid, Content, Thumbnail, Icon } from 'native-base';
 import styles from './style';
 import genericStyles from '../../styles';
 import { saveItem } from '../../utils/storage';
-import { ACCESS_TOKEN, USER_INFO, SUCCESS_MESSAGE, USER_ECODELI } from '../../consts';
+import { ACCESS_TOKEN, USER_INFO, SUCCESS_MESSAGE, USER_ECODELI, BLUE_LAGOON, PRUSSIAN_BLUE } from '../../consts';
+import { LinearGradient } from 'expo-linear-gradient';
 import enviroment from '../../../environment';
-const IMAGE_ECO_LOGO = require('../../../assets/ecodeli-01.png');
-const BTN_ECO_LOGO = require('../../../assets/favicon.png');
-const {iosClientId, androidClientId, iosStandaloneAppClientId, androidStandaloneAppClientId} = enviroment();
+const ECO_LOGO = require('../../../assets/icono-app.png');
+const ERROR_LOGO = require('../../../assets/error.png')
+const { iosClientId, androidClientId, iosStandaloneAppClientId, androidStandaloneAppClientId } = enviroment();
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [loading, setLoading] = useState(false);
-  const url = 'spLogin';
+  const [error, setError] = useState(false);
+  const url = 'spAppMovil_Ind';
   const method = 'POST';
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const {type, user, accessToken} = await Google.logInAsync({
-        iosClientId, 
+      const { type, user, accessToken } = await Google.logInAsync({
         androidClientId,
-        iosStandaloneAppClientId, 
+        iosClientId,
         androidStandaloneAppClientId,
-        scopes:['profile','https://www.googleapis.com/auth/classroom.courses', 'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.coursework.me']
+        iosStandaloneAppClientId,
+        scopes: ['profile', 'https://www.googleapis.com/auth/classroom.courses', 'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.coursework.me']
       });
       const strUser = {
         strAccion: 'LOGIN',
         strUsuario: user.email
       }
-      const {data} = await apiCall(url, method, strUser);
-      if (type === SUCCESS_MESSAGE && data[0].strUsuario !== '') {
+      const { data } = await apiCall(url, method, strUser);
+      const User = {
+        strRol: data[0].strRol,
+        strUsuario: data[0].strUsuario
+      }
+      if (type === SUCCESS_MESSAGE && data[0].strUsuario !== '' && (data[0].strRol == 'OPERATIVO' || data[0].strRol == 'SUPERVISOR' || data[0].strRol == 'OPERARIO')) {
         const userInfo = await saveItem(USER_INFO, JSON.stringify(user));
         const tokenUser = await saveItem(ACCESS_TOKEN, accessToken);
-        const strUserEcodeli = await saveItem (USER_ECODELI, data[0].strUsuario);
-        setLoading(false);
+        const strUserEcodeli = await saveItem(USER_ECODELI, JSON.stringify(User));
         navigation.navigate('Home');
-      } else{
+        setError(false);
+      } else {
+        setError(true);
         setLoading(false);
-        alert('Error al Iniciar Sesión');
       }
     } catch (e) {
+      setError(true);
       setLoading(false);
-      alert('Error' + e);
     }
     setLoading(false);
   };
-  
+
   return (
-      <Container>
-        <Content padder contentContainerStyle={[genericStyles.centeredContent, styles.content]}>
-          <StatusBar backgroundColor='#F0EBEA'/>
+      <LinearGradient
+      colors={[BLUE_LAGOON, PRUSSIAN_BLUE]} style={styles.linearGradient}>
+        <Content padder contentContainerStyle={genericStyles.centeredContent}>
           <Grid style={[genericStyles.centeredGrid, styles.grid]}>
-              <Image style={styles.imageLogo} source={IMAGE_ECO_LOGO} />
-              
-              <Button rounded style={styles.loginBtn} onPress={handleLogin}>
-                <Image source={BTN_ECO_LOGO}/>
-                {loading ? <ActivityIndicator size='large'/> : <Text>Iniciar Sesión</Text>}
-              </Button>
+            <Text style={styles.textTitle}>Ecodeli Industrial</Text>
+            <Text style={styles.textSlogan}>Los profesionales en limpieza</Text>
+            <Image style={styles.imageLogo} source={ECO_LOGO}/>
+            <Button style={styles.loginBtn} onPress={handleLogin}>
+              <Text style={styles.textLoginBtn}>Iniciar Sesión</Text>
+              <Icon style={styles.textLoginBtn} type='FontAwesome5' name='long-arrow-alt-right'/>
+            </Button>
+            <AwesomeAlert show={loading} title='Cargando' closeOnHardwareBackPress={false} closeOnTouchOutside={true} showProgress={true} customView={renderCustomAlertLoading()} message='Por Favor Espere...' />
+            <AwesomeAlert show={error} title='Error' customView={renderCustomAlertError()} message='¡Error al Iniciar Sesión!' />
           </Grid>
         </Content>
-      </Container>
+      </LinearGradient>
   );
 };
+
+renderCustomAlertLoading = () => (
+  <Thumbnail large source={ECO_LOGO} />
+)
+renderCustomAlertError = () => (
+  <Thumbnail large source={ERROR_LOGO} />
+)
