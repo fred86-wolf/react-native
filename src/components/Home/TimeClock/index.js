@@ -2,7 +2,8 @@ import React from 'react';
 import {View, TouchableHighlight} from 'react-native';
 import {Icon, Text} from 'native-base';
 import {DIM_GRAY,COURIOUS_BLUE,PRUSSIAN_BLUE, ALICE_BLUE} from '../../../consts';
-export default function TimeClock(){
+export default function TimeClock(props){
+    const {watch} = props;
     return (
         <View style={{ flexDirection: 'row' , backgroundColor:ALICE_BLUE, borderRadius:10, marginVertical:10}}>
             <View style={{flex:3}}>
@@ -16,7 +17,7 @@ export default function TimeClock(){
                 </View>
                 <View style={{flex:2,alignSelf:'center', marginVertical:10}}>
                     <Icon style={{color:DIM_GRAY}} type='FontAwesome5' name='stopwatch'>
-                        <Text style={{color:DIM_GRAY,fontSize:25,fontWeight:'100'}}>  8:30 A.M.</Text>
+                        <Text style={{color:DIM_GRAY,fontSize:25,fontWeight:'100'}}>  {watch.strHoraI}</Text>
                     </Icon>
                 </View>
             </View>
@@ -29,7 +30,7 @@ export default function TimeClock(){
                 </View>
                 <View style={{flex:2,alignSelf:'center', marginVertical:10}}>
                     <Icon style={{color:DIM_GRAY}} type='FontAwesome5' name='stopwatch'>
-                        <Text style={{color:DIM_GRAY,fontSize:25, fontWeight:'100'}}>  3:00 PM</Text>
+                        <Text style={{color:DIM_GRAY,fontSize:25, fontWeight:'100'}}>  {watch.strHoraF}</Text>
                     </Icon>
                 </View>
             </View>

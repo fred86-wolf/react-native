@@ -77,7 +77,7 @@ export default function Home({ navigation }) {
         </Suspense>
         { watch === 'No' ?
         <Suspense fallback={<Overload/>}>
-          <TimeClock/>
+          <TimeClock watch={watch}/>
         </Suspense> : 
         <Suspense fallback={<Overload/>}>
         <RollCall watch={watch}/>

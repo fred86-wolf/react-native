@@ -5,7 +5,6 @@ import {WHITE,COURIOUS_BLUE,PRUSSIAN_BLUE} from '../../../consts';
 const { width,height } = Dimensions.get('window');
 import moment from 'moment';
 import 'moment/locale/es';
-import { ScrollView } from 'react-native-gesture-handler';
 moment.locale('es');
 export default function DetailProfile(props){
   const {userEco, arrayEdoCivil, arrayEscolaridad} = props;

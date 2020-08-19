@@ -1,7 +1,8 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import {Alert, ScrollView} from 'react-native';
+import {Alert, ScrollView, TextInput} from 'react-native';
 import apiCall from '../../redux/api';
-import { Container, Content, Button, Text, Thumbnail, Icon } from 'native-base';
+import { Container, Content, Button, Text, Thumbnail, Icon, Form , Input} from 'native-base';
+import { Formik } from 'formik';
 import styles from './style';
 import genericStyles from '../../styles';
 const MyHeader = lazy(() => import('../../components/Header'));
@@ -35,29 +36,29 @@ export default function Profile({ navigation }) {
   const onChange = (e, type) => {
     setFrmDataUserEco({ ...frmDataUserEco, [type]: e.nativeEvent.text });
   }
-  function defaultFrmValue(userEco) {
+  function defaultFrmValue() {
     return {
-      strEstado: userEco.strEstado || '',
-      strPoblacion: userEco.strPoblacion || '',
-      strDireccion: userEco.strDireccion || '',
-      strDireccionNumero: userEco.strDireccionNumero || '',
-      strDireccionNumeroInt: userEco.strDireccionNumeroInt || '',
-      strTelefono: userEco.strTelefono || '',
-      strCodigoPostal: userEco.strCodigoPostal || '',
-      strNombreContacto: userEco.strNombreContacto || '',
-      strTelefonoContacto: userEco.strTelefonoContacto || '',
-      strBeneficiario: userEco.strBeneficiario || '',
-      strParentesco: userEco.strParentesco || '',
-      strBeneficiario2: userEco.strBeneficiario2 || '',
-      strParentesco2: userEco.strParentesco2 || '',
-      strBeneficiario3: userEco.strBeneficiario3 || '',
-      strParentesco3: userEco.strParentesco3 || '',
-      strBeneficiario4: userEco.strBeneficiario4 || '',
-      strParentesco4: userEco.strParentesco4 || '',
-      strEnfermedad: userEco.strEnfermedad || '',
-      strAlergias: userEco.strAlergias || '',
-      dblEstatura: userEco.dblEstatura || 0.00,
-      dblPeso: userEco.dblPeso || 0.00
+      strEstado: '',
+      strPoblacion: '',
+      strDireccion: '',
+      strDireccionNumero: '',
+      strDireccionNumeroInt: '',
+      strTelefono: '',
+      strCodigoPostal: '',
+      strNombreContacto: '',
+      strTelefonoContacto: '',
+      strBeneficiario: '',
+      strParentesco: '',
+      strBeneficiario2: '',
+      strParentesco2: '',
+      strBeneficiario3: '',
+      strParentesco3: '',
+      strBeneficiario4: '',
+      strParentesco4: '',
+      strEnfermedad: '',
+      strAlergias: '',
+      dblEstatura: 0.00,
+      dblPeso: 0.00
     }
   }
   const getEdoCivils = async () => {
@@ -101,7 +102,8 @@ export default function Profile({ navigation }) {
         strUsuario: userEcodeli.strUsuario
       }
       const { data } = await apiCall(url, method, strUser);
-      setUserEco(data[0]);
+      let userEco = data[0];
+      setUserEco(userEco);
       setStrEstadoCivil(data[0].strEstadoCivil);
       setStrNivelAcademico(data[0].strNivelAcademico);
       setStrCamisa(data[0].strCamisa);
@@ -165,7 +167,26 @@ export default function Profile({ navigation }) {
       <ScrollView>
       <Content contentContainerStyle={genericStyles.centeredContent} padder>
           <Thumbnail large style={styles.profileImage} source={{ uri: userInfo.photoUrl }} />
-          <Suspense fallback={<Overload/>}>
+          <Formik initialValues={userEco}
+          onSubmit={values => console.log('Valores desde el formik',values)}>
+            {({handleChange, handleBlur, handleSubmit, values}) => (
+              <Form>
+              <Text>{userEco.strUsuario}</Text>
+              <Text>{`${userEco.strNombre} ${userEco.strApellidoPaterno} ${userEco.strApellidoMaterno}`}</Text>
+              <Text>{moment(userEco.strFechaNacimiento).format('LL')}</Text>
+              <Text>{userEco.strEstadoCivil}</Text>
+              <Text>{`${userEco.strCentroCostos} ${userEco.strDescripcionCC}`}</Text>
+              <Input style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }} defaultValue={userEco.strEstado ? userEco.strEstado  : ''} onChange={(e) => onChange(e, 'strEstado')} />
+              <Input style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }} defaultValue={userEco.strPoblacion} onChange={(e) => onChange(e, 'strPoblacion')} />
+              <Input style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }} defaultValue={userEco.strDireccion} onChange={(e) => onChange(e, 'strDireccion')} />
+              <Input style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 15 }} defaultValue={userEco.strDireccionNumero} onChange={(e) => onChange(e, 'strDireccionNumero')} />
+              <Button onPress={handleSubmit}>
+                <Text>Guardar</Text>
+              </Button>
+            </Form>
+            )}
+          </Formik>
+          {/* <Suspense fallback={<Overload/>}>
             <DetailProfile userEco={userEco} arrayEdoCivil={arrayEdoCivil} arrayEscolaridad={arrayEscolaridad}/>
           </Suspense>
           <Suspense fallback={<Overload/>}>
@@ -173,11 +194,11 @@ export default function Profile({ navigation }) {
           </Suspense>
           <Suspense fallback={<Overload/>}>
             <HealthProfile userEco={userEco} arrayCamisas={arrayCamisas} arrayPantalones={arrayPantalones} arrayCalzados={arrayCalzados}/>
-          </Suspense>
-          <Button style={styles.saveBtn} onPress={onSaveData}>
+          </Suspense> */}
+          {/* <Button style={styles.saveBtn} onPress={onSaveData}>
               <Text style={styles.textBtn}>Guardar</Text>
               <Icon  type='FontAwesome5' name='save'/>
-          </Button>
+          </Button> */}
         </Content>
       </ScrollView>
     </Container>
