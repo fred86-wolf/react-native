@@ -172,18 +172,13 @@ export default function Profile({ navigation }) {
             {({handleChange, handleSubmit, values}) => (
             <Suspense fallback={<Overload/>}>
               <DetailProfile userEco={values} arrayEdoCivil={arrayEdoCivil} arrayEscolaridad={arrayEscolaridad}/>
+              <BenefitsProfile userEco={values}  handleChange={handleChange} handleSubmit={handleSubmit}/>
+              <HealthProfile userEco={userEco} arrayCamisas={arrayCamisas} arrayPantalones={arrayPantalones} arrayCalzados={arrayCalzados} handleChange={handleChange} handleSubmit={handleSubmit}/>
               <Button style={styles.saveBtn} onPress={handleSubmit}>
                 <Text style={styles.textBtn}>Guardar</Text>
                 <Icon  type='FontAwesome5' name='save'/>
-                </Button>
-            </Suspense>
-            // <Suspense fallback={<Overload/>}>
-            //   <BenefitsProfile userEco={values}  handleChange={handleChange} handleSubmit={handleSubmit}/>
-            // </Suspense>
-            // <Suspense fallback={<Overload/>}>
-            //  <HealthProfile userEco={userEco} arrayCamisas={arrayCamisas} arrayPantalones={arrayPantalones} arrayCalzados={arrayCalzados} handleChange={handleChange} handleSubmit={handleSubmit}/>
-            // </Suspense>
-            
+              </Button>
+            </Suspense>          
               )}
           </Formik>
         </Content>
