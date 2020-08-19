@@ -169,36 +169,23 @@ export default function Profile({ navigation }) {
           <Thumbnail large style={styles.profileImage} source={{ uri: userInfo.photoUrl }} />
           <Formik initialValues={userEco}
           onSubmit={values => console.log('Valores desde el formik',values)}>
-            {({handleChange, handleBlur, handleSubmit, values}) => (
-              <Form>
-              <Text>{userEco.strUsuario}</Text>
-              <Text>{`${userEco.strNombre} ${userEco.strApellidoPaterno} ${userEco.strApellidoMaterno}`}</Text>
-              <Text>{moment(userEco.strFechaNacimiento).format('LL')}</Text>
-              <Text>{userEco.strEstadoCivil}</Text>
-              <Text>{`${userEco.strCentroCostos} ${userEco.strDescripcionCC}`}</Text>
-              <Input style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }} defaultValue={userEco.strEstado ? userEco.strEstado  : ''} onChange={(e) => onChange(e, 'strEstado')} />
-              <Input style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }} defaultValue={userEco.strPoblacion} onChange={(e) => onChange(e, 'strPoblacion')} />
-              <Input style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 5 }} defaultValue={userEco.strDireccion} onChange={(e) => onChange(e, 'strDireccion')} />
-              <Input style={{ fontSize: 20, alignSelf: 'flex-start', marginTop: 15 }} defaultValue={userEco.strDireccionNumero} onChange={(e) => onChange(e, 'strDireccionNumero')} />
-              <Button onPress={handleSubmit}>
-                <Text>Guardar</Text>
-              </Button>
-            </Form>
-            )}
+            {({handleChange, handleSubmit, values}) => (
+            <Suspense fallback={<Overload/>}>
+              <DetailProfile userEco={values} arrayEdoCivil={arrayEdoCivil} arrayEscolaridad={arrayEscolaridad}/>
+              <Button style={styles.saveBtn} onPress={handleSubmit}>
+                <Text style={styles.textBtn}>Guardar</Text>
+                <Icon  type='FontAwesome5' name='save'/>
+                </Button>
+            </Suspense>
+            // <Suspense fallback={<Overload/>}>
+            //   <BenefitsProfile userEco={values}  handleChange={handleChange} handleSubmit={handleSubmit}/>
+            // </Suspense>
+            // <Suspense fallback={<Overload/>}>
+            //  <HealthProfile userEco={userEco} arrayCamisas={arrayCamisas} arrayPantalones={arrayPantalones} arrayCalzados={arrayCalzados} handleChange={handleChange} handleSubmit={handleSubmit}/>
+            // </Suspense>
+            
+              )}
           </Formik>
-          {/* <Suspense fallback={<Overload/>}>
-            <DetailProfile userEco={userEco} arrayEdoCivil={arrayEdoCivil} arrayEscolaridad={arrayEscolaridad}/>
-          </Suspense>
-          <Suspense fallback={<Overload/>}>
-            <BenefitsProfile userEco={userEco} />
-          </Suspense>
-          <Suspense fallback={<Overload/>}>
-            <HealthProfile userEco={userEco} arrayCamisas={arrayCamisas} arrayPantalones={arrayPantalones} arrayCalzados={arrayCalzados}/>
-          </Suspense> */}
-          {/* <Button style={styles.saveBtn} onPress={onSaveData}>
-              <Text style={styles.textBtn}>Guardar</Text>
-              <Icon  type='FontAwesome5' name='save'/>
-          </Button> */}
         </Content>
       </ScrollView>
     </Container>
