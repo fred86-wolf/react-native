@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import {PRUSSIAN_BLUE} from '../../consts';
 import Constants from 'expo-constants';
 
 export default StyleSheet.create({
     header: {
-        backgroundColor: '#113f67',
+        backgroundColor: PRUSSIAN_BLUE,
         marginTop: Constants.platform.android ? Constants.statusBarHeight : 0
     }
 });

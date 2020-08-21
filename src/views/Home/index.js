@@ -75,13 +75,13 @@ export default function Home({ navigation }) {
         <Suspense fallback={<Overload/>}>
           <Carousel unitsCourses={unitsCourses} />
         </Suspense>
-        { watch === 'No' ?
-        <Suspense fallback={<Overload/>}>
-          <TimeClock watch={watch}/>
-        </Suspense> : 
+        { watch !== 'Si' ?
         <Suspense fallback={<Overload/>}>
         <RollCall watch={watch}/>
-        </Suspense>}
+        </Suspense>:
+        <Suspense fallback={<Overload/>}>
+          <TimeClock watch={watch}/>
+        </Suspense> }
         <View>
           <Text>Premios</Text>
         </View>

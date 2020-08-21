@@ -19,12 +19,12 @@ export default function RollCall(props){
             </View>
             <View style={{flex:3, alignSelf:'center'}}>
                 <View style={{flex:3, marginVertical:5}}>
-                { watch.strAsistencia === '1' ?  
-                    <Icon style={{color:MADANG, alignSelf:'center'}} type='FontAwesome5' name='check-circle'>
-                        <Text style={{fontSize:20,fontWeight:'bold',color: DIM_GRAY}}>  Tienes Asistencia</Text>
-                    </Icon> :
+                { watch.strAsistencia !== '1' ?  
                     <Icon style={{color:RADICAL_RED}} type='FontAwesome5' name='times-circle'>
                         <Text style={{fontSize:20,fontWeight:'bold',color: DIM_GRAY}}>  Tienes Falta</Text>
+                    </Icon>:
+                    <Icon style={{color:MADANG, alignSelf:'center'}} type='FontAwesome5' name='check-circle'>
+                        <Text style={{fontSize:20,fontWeight:'bold',color: DIM_GRAY}}>  Tienes Asistencia</Text>
                     </Icon>}
                 </View>
             </View>

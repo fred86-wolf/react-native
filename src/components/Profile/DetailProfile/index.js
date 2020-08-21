@@ -8,6 +8,7 @@ import 'moment/locale/es';
 moment.locale('es');
 export default function DetailProfile(props){
   const {userEco, arrayEdoCivil, arrayEscolaridad} = props;
+  console.log(props);
   const [openOne, setOpenOne] = useState(false);
   const sectionOne = () => {
     setOpenOne(!openOne);

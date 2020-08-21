@@ -1,7 +1,10 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { Container, Content, H3,Right, Button, Icon, Card, CardItem } from 'native-base';
+import {View} from 'react-native';
+import { Container, Content, Text } from 'native-base';
+import genericStyles from '../../styles';
 const MyHeader = lazy(() => import('../../components/Header'));
 const ListCostCenter = lazy(() => import ('../../components/CostCenter/ListCostCenter'));
+const ListView = lazy(() => import ('../../components/ListView'));
 import Overload from '../../components/Overload';
 import apiCall from '../../redux/api';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -28,18 +31,11 @@ export default function CostCenter({ route, navigation }) {
                 <MyHeader />
             </Suspense>
             <Content padder>
-                <Card>
-                    <CardItem bordered>
-                        <H3>Centros de Costos</H3>
-                        <Right>
-                            <Button transparent>
-                                <Icon type='FontAwesome5' name='closed-captioning' />
-                            </Button>
-                        </Right>
-                    </CardItem>
-                </Card>
+                <View style={genericStyles.boxtitleListView}>
+                    <Text style={genericStyles.titleListView} >Centros de Costos</Text>
+                </View>
                 <Suspense fallback={<Overload/>}>
-                    <ListCostCenter arrayCC={arrayCC} navigation={navigation}/>
+                    <ListView arrayCC={arrayCC} navigation={navigation}/>
                 </Suspense>
             </Content>
         </Container>

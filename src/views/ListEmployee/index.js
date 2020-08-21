@@ -1,9 +1,10 @@
 import React, {useEffect, useState,lazy, Suspense} from 'react';
-import { Container,Content,H3,ListItem,Left,Text,Body,Right,Button,Icon,Badge, Card, CardItem } from 'native-base';
+import { Container,Content,H3,Right,Button,Icon, Card, CardItem } from 'native-base';
 import { SearchBar } from 'react-native-elements';
 import Overload from '../../components/Overload';
 const MyHeader = lazy(() => import('../../components/Header'));
-const FlatListEmployee = lazy(()=> import ('../../components/ListEmployee/FlatListEmployee'))
+const FlatListEmployee = lazy(()=> import ('../../components/ListEmployee/FlatListEmployee'));
+const ListView = lazy(() => import('../../components/ListView'));
 import apiCall from '../../redux/api';
 import genericStyles from '../../styles';
 import AwesomeAlert from 'react-native-awesome-alerts'
@@ -62,7 +63,7 @@ export default function ListEmployee({route,navigation}){
           inputContainerStyle={genericStyles.inputSearchBar}
         /> */}
         <Suspense fallback={<Overload/>}>
-          <FlatListEmployee arrayEmployees={arrayEmployees} navigation={navigation}/>
+          <ListView arrayEmployees={arrayEmployees} navigation={navigation}/>
         </Suspense>
       </Content>
     </Container>

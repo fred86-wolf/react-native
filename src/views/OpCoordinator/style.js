@@ -1,6 +1,17 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import Constants from 'expo-constants';
-const { width,height } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
+import {BLUE_LAGOON, WHITE_SMOKE} from '../../consts';
 
-const styles = StyleSheet.create({
-  });
+export default StyleSheet.create({
+  boxOpCoordinator:{
+    flex:6,
+    flexDirection:'row',
+    elevation:5, 
+    backgroundColor:BLUE_LAGOON, 
+    padding:10, 
+    borderRadius:5
+  },
+  titleOpCoordinator:{
+    color:WHITE_SMOKE, 
+    fontSize:22
+  }
+});
