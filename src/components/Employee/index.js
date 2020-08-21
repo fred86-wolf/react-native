@@ -4,7 +4,6 @@ import moment from 'moment';
 import 'moment/locale/es';
 moment.locale('es');
 export default function Employee(props){
-    console.log(props);
     const {employee} = props;
     return(
         <Form style={{ alignItems: 'flex-start', marginHorizontal: 10, backgroundColor: '#f4f4f4' }}>
