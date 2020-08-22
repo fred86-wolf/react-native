@@ -3,7 +3,6 @@ import {View} from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import genericStyles from '../../styles';
 const MyHeader = lazy(() => import('../../components/Header'));
-const ListCostCenter = lazy(() => import ('../../components/CostCenter/ListCostCenter'));
 const ListView = lazy(() => import ('../../components/ListView'));
 import Overload from '../../components/Overload';
 import apiCall from '../../redux/api';

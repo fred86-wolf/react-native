@@ -42,7 +42,7 @@ export default function DrawerContent(props){
       </CardItem>
       <ListItem icon last onPress={()=> props.navigation.navigate('Home')}>
         <Left>
-          <Button>
+          <Button transparent>
             <Icon name='home' />
           </Button>
         </Left>
@@ -57,7 +57,7 @@ export default function DrawerContent(props){
       </ListItem>
       <ListItem icon last onPress={()=> props.navigation.navigate('Awards')}>
         <Left>
-          <Button>
+          <Button transparent>
             <Icon name='trophy' />
           </Button>
         </Left>
@@ -72,7 +72,7 @@ export default function DrawerContent(props){
       </ListItem>
       { userEcodeli && userEcodeli.strRol === 'SUPERVISOR' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'OpCoordinator', params:userEcodeli})}>
         <Left>
-          <Button>
+          <Button transparent>
             <Icon type='FontAwesome5' name='users' />
           </Button>
         </Left>
@@ -87,7 +87,7 @@ export default function DrawerContent(props){
       </ListItem> : null }
       { userEcodeli && userEcodeli.strRol === 'OPERATIVO' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'CostCenter', params:userEcodeli})}>
         <Left>
-          <Button>
+          <Button transparent>
             <Icon type='FontAwesome5' name='closed-captioning' />
           </Button>
         </Left>
@@ -102,7 +102,7 @@ export default function DrawerContent(props){
       </ListItem> : null }
       {userEcodeli && userEcodeli.strRol === 'OPERARIO' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'Schedule', params:userEcodeli})}>
         <Left>
-          <Button>
+          <Button transparent>
             <Icon type='FontAwesome5' name='clipboard-list' />
           </Button>
         </Left>
@@ -117,7 +117,7 @@ export default function DrawerContent(props){
       </ListItem>: null}
       <ListItem icon last onPress={logOut}>
         <Left>
-          <Button>
+          <Button transparent>
             <Icon type='FontAwesome5' name='sign-out-alt'/>
           </Button>
         </Left>

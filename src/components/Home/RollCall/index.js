@@ -1,30 +1,30 @@
 import React from 'react';
 import {View, TouchableHighlight} from 'react-native';
 import {Text, Icon} from 'native-base';
-import {ALICE_BLUE, MADANG,RADICAL_RED, COURIOUS_BLUE, DIM_GRAY} from '../../../consts';
+import styles from './style';
 
 export default function RollCall(props){
     const {watch} = props;
     return(
-        <View style={{backgroundColor:ALICE_BLUE, borderRadius:10, marginVertical:5}}>
-            <View style={{flexDirection:'row', flex:3}}>
-            <View style={{flex:2, marginVertical:5,marginLeft:10}}>
+        <View style={styles.boxFistRollCall}>
+            <View style={styles.boxFirstRow}>
+            <View style={styles.boxIcon}>
                     <TouchableHighlight>
-                        <Icon style={{color:COURIOUS_BLUE}} type='FontAwesome5' name='calendar-alt'></Icon>
+                        <Icon style={styles.iconCalendar} type='FontAwesome5' name='calendar-alt'></Icon>
                     </TouchableHighlight>
                 </View>
-                <View style={{flex:4,marginLeft:40, marginVertical:5}}>
-                    <Text style={{fontSize:20,fontWeight:'bold',color: DIM_GRAY}}> Hoy</Text>
+                <View style={styles.boxTitle}>
+                    <Text style={styles.textRollCall}> Hoy</Text>
                 </View>
             </View>
-            <View style={{flex:3, alignSelf:'center'}}>
-                <View style={{flex:3, marginVertical:5}}>
+            <View style={styles.boxSecondRollCall}>
+                <View style={styles.boxSecondRow}>
                 { watch.strAsistencia !== '1' ?  
-                    <Icon style={{color:RADICAL_RED}} type='FontAwesome5' name='times-circle'>
-                        <Text style={{fontSize:20,fontWeight:'bold',color: DIM_GRAY}}>  Tienes Falta</Text>
+                    <Icon style={styles.iconLack} type='FontAwesome5' name='times-circle'>
+                        <Text style={styles.iconTextLack}>  Tienes Falta</Text>
                     </Icon>:
-                    <Icon style={{color:MADANG, alignSelf:'center'}} type='FontAwesome5' name='check-circle'>
-                        <Text style={{fontSize:20,fontWeight:'bold',color: DIM_GRAY}}>  Tienes Asistencia</Text>
+                    <Icon style={styles.iconAttended} type='FontAwesome5' name='check-circle'>
+                        <Text style={styles.iconTextAttended}>  Tienes Asistencia</Text>
                     </Icon>}
                 </View>
             </View>

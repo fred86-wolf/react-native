@@ -3,7 +3,6 @@ import { Container,Content,H3,Right,Button,Icon, Card, CardItem } from 'native-b
 import { SearchBar } from 'react-native-elements';
 import Overload from '../../components/Overload';
 const MyHeader = lazy(() => import('../../components/Header'));
-const FlatListEmployee = lazy(()=> import ('../../components/ListEmployee/FlatListEmployee'));
 const ListView = lazy(() => import('../../components/ListView'));
 import apiCall from '../../redux/api';
 import genericStyles from '../../styles';
