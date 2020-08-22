@@ -5,6 +5,7 @@ import styles from './style';
 
 export default function ListView(props){
     const {arrayCoordinators, navigation, arrayCC, arrayEmployees} = props;
+    console.log(props)
    return(
     <SafeAreaView style={{marginTop:10}}>
     {arrayCoordinators && arrayCoordinators.map((coordinator,index) => {
@@ -47,6 +48,7 @@ export default function ListView(props){
         </View>
         <View style={styles.boxBody}>
             <Text style={styles.textBody}>{`${employee.strApellidoPaterno} ${employee.strApellidoMaterno} ${employee.strNombre}`}</Text>
+            <Text style={styles.textSchedule}>{employee.strTurno}</Text>
         </View>
         <View style={styles.boxRight}>
             <TouchableOpacity style={styles.nextBtn}>

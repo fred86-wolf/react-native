@@ -1,5 +1,5 @@
 import {StyleSheets, StyleSheet} from 'react-native';
-import {COURIOUS_BLUE,WHITE_SMOKE} from '../../consts';
+import {COURIOUS_BLUE,WHITE_SMOKE, DIM_GRAY} from '../../consts';
 
 export default StyleSheet.create({
     boxItemList:{
@@ -30,6 +30,10 @@ export default StyleSheet.create({
         justifyContent:'center'
     },
     textBody:{
+        marginHorizontal:5
+    },
+    textSchedule:{
+        color:DIM_GRAY, 
         marginHorizontal:5
     },
     boxRight:{

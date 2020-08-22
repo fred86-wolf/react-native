@@ -44,8 +44,8 @@ export default function OpCoordinator({ route, navigation }) {
         <MyHeader />
       </Suspense>      
       <Content padder>
-        <View style={styles.boxOpCoordinator}>
-          <Text style={styles.titleOpCoordinator}>Listado de Coordinadores Operativos</Text>
+        <View style={genericStyles.boxtitleListView}>
+          <Text style={genericStyles.titleListView}>Listado de Coordinadores Operativos</Text>
         </View>
         <SearchBar
           placeholder='Buscar...'
