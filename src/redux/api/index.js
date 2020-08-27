@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://www.limpiezamexico.mx/ApiRest/APIAppMovilInd/v1/AppMovilInd/';
+const baseURL = 'No les pongo a donde hago la peticion disculpen';
 
 export default (url, method, data, headers) =>
   axios({

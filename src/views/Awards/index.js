@@ -3,7 +3,8 @@ import {Image} from 'react-native';
 import styles from './style';
 import MyHeader from '../../components/Header';
 import apiCall from '../../redux/api';
-import { Container, Content,Text,View, Spinner } from 'native-base';
+import { Container, Content,Text,View} from 'native-base';
+import Overload from '../../components/Overload';
 const uri = 'https://facebook.github.io/react-native/docs/assets/favicon.png';
 export default function Awards(){
     const [awardsPersonal, setAwardsPersonal] = useState(null);
@@ -17,8 +18,8 @@ export default function Awards(){
         const {data} = await apiCall(url,method, obj);
         setAwardsPersonal(data);
       }
-    if (!awardsPersonal) {
-        return <Spinner color='blue' />;
+      if (!awardsPersonal) {
+        return <Overload/>;
       }
     return(
         <Container>

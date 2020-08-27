@@ -1,80 +1,27 @@
-import React, { lazy, Suspense } from 'react';
+import React, {useState, useEffect, lazy, Suspense } from 'react';
 import { View } from 'react-native';
-import { Container, Content, List, ListItem, Text, Left, Body, Right,H3 } from 'native-base';
+import genericStyles from '../../styles';
+import { Container, Content, Text } from 'native-base';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import Overload from '../../components/Overload';
 const MyHeader = lazy(() => import('../../components/Header'));
+const ListView = lazy(() => import ('../../components/ListView'));
 
 export default function Schedule({ route }) {
-    console.log(route.params);
+    const strObj = route.params;
+    console.log(strObj);
     return (
         <Container>
             <Suspense fallback={<Overload/>}>
                 <MyHeader />
             </Suspense>
-            <Content>
-                <List>
-                    <H3 style={{alignSelf:'center', fontWeight:'bold'}}>Hoy</H3>
-                    <ListItem itemDivider>
-                        <Text>A</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Aaron Bennet</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Ali Connors</Text>
-                    </ListItem>
-                    <ListItem itemDivider>
-                        <Text>B</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Bradley Horowitz</Text>
-                    </ListItem>
-                    <ListItem itemDivider>
-                        <Text>C</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Caron Bennet</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Cli Connors</Text>
-                    </ListItem>
-                    <ListItem itemDivider>
-                        <Text>D</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Dradley Horowitz</Text>
-                    </ListItem>
-                    <ListItem itemDivider>
-                        <Text>F</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Faron Bennet</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Fli Connors</Text>
-                    </ListItem>
-                    <ListItem itemDivider>
-                        <Text>G</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Gradley Horowitz</Text>
-                    </ListItem>
-                    <ListItem itemDivider>
-                        <Text>H</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Haron Bennet</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Hli Connors</Text>
-                    </ListItem>
-                    <ListItem itemDivider>
-                        <Text>I</Text>
-                    </ListItem>
-                    <ListItem>
-                        <Text>Iradley Horowitz</Text>
-                    </ListItem>
-                </List>
+            <Content padder>
+                <View style={genericStyles.boxtitleListView}>
+                    <Text style={genericStyles.titleListView}>Cronograma de Actividades</Text>
+                </View>
+                <Suspense fallback={<Overload/>}>
+                    <ListView/>
+                </Suspense>
             </Content>
         </Container>
     )

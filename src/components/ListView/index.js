@@ -4,8 +4,7 @@ import {Text, Icon} from 'native-base';
 import styles from './style';
 
 export default function ListView(props){
-    const {arrayCoordinators, navigation, arrayCC, arrayEmployees} = props;
-    console.log(props)
+    const {arrayCoordinators, navigation, arrayCC, arrayEmployees,strObj} = props;
    return(
     <SafeAreaView style={{marginTop:10}}>
     {arrayCoordinators && arrayCoordinators.map((coordinator,index) => {

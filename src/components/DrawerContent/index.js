@@ -6,6 +6,7 @@ import { getItem, clearAll } from '../../utils/storage';
 import { USER_INFO, USER_ECODELI } from '../../consts';
 
 export default function DrawerContent(props){
+    const {navigation} = props;
     const [userInfo, setUserInfo] = useState(null);
     const [userEcodeli, setUserEcodeli] = useState(null);
     useEffect(() => {
@@ -23,7 +24,7 @@ export default function DrawerContent(props){
       }
       const logOut = async () =>{
         await clearAll();
-        props.navigation.navigate('Login');
+        navigation.navigate('Login');
       }
     return (
     <Content style={styles.container}>
@@ -40,10 +41,10 @@ export default function DrawerContent(props){
         <Right>
         </Right>
       </CardItem>
-      <ListItem icon last onPress={()=> props.navigation.navigate('Home')}>
+      <ListItem icon last onPress={()=> navigation.navigate('Home')}>
         <Left>
           <Button transparent>
-            <Icon name='home' />
+            <Icon style={styles.btnIcon} name='home' />
           </Button>
         </Left>
         <Body>
@@ -55,10 +56,10 @@ export default function DrawerContent(props){
           </Badge>
         </Right>
       </ListItem>
-      <ListItem icon last onPress={()=> props.navigation.navigate('Awards')}>
+      <ListItem icon last onPress={()=> navigation.navigate('Awards')}>
         <Left>
           <Button transparent>
-            <Icon name='trophy' />
+            <Icon style={styles.btnIcon} name='trophy' />
           </Button>
         </Left>
         <Body>
@@ -70,10 +71,10 @@ export default function DrawerContent(props){
           </Badge>
         </Right>
       </ListItem>
-      { userEcodeli && userEcodeli.strRol === 'SUPERVISOR' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'OpCoordinator', params:userEcodeli})}>
+      { userEcodeli && userEcodeli.strRol === 'SUPERVISOR' ? <ListItem icon last onPress={()=> navigation.navigate('CostCenter', { screen: 'OpCoordinator', params:userEcodeli})}>
         <Left>
           <Button transparent>
-            <Icon type='FontAwesome5' name='users' />
+            <Icon style={styles.btnIcon} type='FontAwesome5' name='users' />
           </Button>
         </Left>
         <Body>
@@ -85,10 +86,10 @@ export default function DrawerContent(props){
           </Badge>
         </Right>
       </ListItem> : null }
-      { userEcodeli && userEcodeli.strRol === 'OPERATIVO' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'CostCenter', params:userEcodeli})}>
+      { userEcodeli && userEcodeli.strRol === 'OPERATIVO' ? <ListItem icon last onPress={()=> navigation.navigate('CostCenter', { screen: 'CostCenter', params:userEcodeli})}>
         <Left>
           <Button transparent>
-            <Icon type='FontAwesome5' name='closed-captioning' />
+            <Icon style={styles.btnIcon} type='FontAwesome5' name='closed-captioning' />
           </Button>
         </Left>
         <Body>
@@ -100,10 +101,10 @@ export default function DrawerContent(props){
           </Badge>
         </Right>
       </ListItem> : null }
-      {userEcodeli && userEcodeli.strRol === 'OPERARIO' ? <ListItem icon last onPress={()=> props.navigation.navigate('CostCenter', { screen: 'Schedule', params:userEcodeli})}>
+      {userEcodeli && userEcodeli.strRol === 'OPERARIO' ? <ListItem icon last onPress={()=> navigation.navigate('CostCenter', { screen: 'Schedule', params:userEcodeli})}>
         <Left>
           <Button transparent>
-            <Icon type='FontAwesome5' name='clipboard-list' />
+            <Icon style={styles.btnIcon} type='FontAwesome5' name='clipboard-list' />
           </Button>
         </Left>
         <Body>
@@ -118,7 +119,7 @@ export default function DrawerContent(props){
       <ListItem icon last onPress={logOut}>
         <Left>
           <Button transparent>
-            <Icon type='FontAwesome5' name='sign-out-alt'/>
+            <Icon style={styles.btnIcon} type='FontAwesome5' name='sign-out-alt'/>
           </Button>
         </Left>
         <Body>

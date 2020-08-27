@@ -1,4 +1,4 @@
-import {StyleSheets, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {COURIOUS_BLUE,WHITE_SMOKE, DIM_GRAY} from '../../consts';
 
 export default StyleSheet.create({
